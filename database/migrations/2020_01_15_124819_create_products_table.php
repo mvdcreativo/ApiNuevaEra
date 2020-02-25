@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->mediumText('name');
             $table->string('name_concat');
-            $table->string('slug')->unique();
+            $table->string('slug', 128)->unique();
             $table->float('price');
             $table->string('status')->default('ACT');
             $table->float('price_mayorista')->nullable();
