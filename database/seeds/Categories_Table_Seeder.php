@@ -15,16 +15,21 @@ class CategoriesTableSeeder extends Seeder
         $data= json_decode($json);
 
         foreach ($data as $campo) {
-            if($campo->category_id === null){
+                if($campo->idStatus == 2){
+                    $status = "DIS";
+                }else{
+                    $status = "ACT";
+                };
+
                 $name = $campo->name;
                 $category = new App\Category([
                     'id' => $campo->id,
                     'name'=> $name,
                     'slug'=> str_slug($name),
-                    'category_id' => $campo->category_id
+                    'status' => $status
                 ]);
                 $category->save();
-            }
+            
             // $category->vehicle_categories()->sync(1);
         }
     }

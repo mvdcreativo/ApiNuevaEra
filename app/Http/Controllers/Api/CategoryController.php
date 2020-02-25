@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        return Category::with('categories')->where('category_id', null)->get();
+        return Category::all();
     }
 
 
@@ -84,12 +84,12 @@ class CategoryController extends Controller
      */
     public function update($id, Request $request)
     {
-        $this->validate($request, [
-            'name' => ['required']
-        ]);
+     
 
         $name = $request->name;
         $slug = str_slug($name);
+        $status = $request->status;
+
         $validateCategory = Category::where('slug', $slug)->where('id', '!=', $id)->get();
 
 
@@ -98,8 +98,21 @@ class CategoryController extends Controller
         }else{
 
             $category = Category::find($id);
-            $category->name = $name;
-            $category->slug = $slug;
+            if($request->name)$category->name = $name;
+            if($request->slug)$category->slug = $slug;
+            if($request->status){
+                $brand->status =  $status;
+                /////AFECTAR ARTICULOS AL ACTIVAR O DESACTIVAR MARCA
+                $product= Product::where('category_id', $category->id)->get();
+
+                foreach ($product as $element) {
+                    // return $element;
+                    $element->status = $request->status;
+                    $element->save();
+                }
+
+            } 
+
             $category->save();
 
             return response()->json($category, 200);

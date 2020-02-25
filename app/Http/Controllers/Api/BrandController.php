@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Brand;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
@@ -19,8 +20,10 @@ class BrandController extends Controller
         return Brand::all();
     }
 
+
+
     public function brand_by_slug($slug){
-        $brand = Brand::with('products')->where('slug', $slug)->first();
+        $brand = Brand::with('products')->where('slug', $slug)->where('status', 'ACT')->first();
         return response()->json($brand, 200);
     }
 
@@ -42,6 +45,7 @@ class BrandController extends Controller
         ]);
         $name = $request->name;
         $slug = str_slug($name);
+        $destaca = $request->destaca;
         $description= $request->description;
 
         $validateBrand = Brand::where('slug', $slug)->get();
@@ -54,6 +58,7 @@ class BrandController extends Controller
             $brand = new Brand;
             $brand->name = $name;
             $brand->slug = $slug;
+            $brand->destaca = $destaca;
             $brand->description = $description;
             $brand->save();
 
@@ -94,14 +99,13 @@ class BrandController extends Controller
      */
     public function update($id, Request $request)
     {
-        $this->validate($request, [
-            'name' => ['required']
-        ]);
+
 
         $name = $request->name;
         $slug = str_slug($name);
-        $brand= $request->description;
+        $destaca = $request->destaca;
         $description= $request->description;
+        $status = $request->status;
 
         $validateBrand = Brand::where('slug', $slug)->where('id', '!=', $id)->get();
 
@@ -111,11 +115,28 @@ class BrandController extends Controller
 
 
             $brand = Brand::find($id);
-            $brand->name = $name;
-            $brand->slug = $slug;
-            $brand->description = $description;
+            if($request->name) $brand->name = $name;
+            if($request->slug) $brand->slug = $slug;
+            // if($request->destaca or $request->destaca == 0 and $request->destaca != null) $brand->destaca = $destaca;
+            if($request->destaca or $request->destaca == 0 ) $brand->destaca = $destaca;
+
+            if($request->description) $brand->description = $description;
+            if($request->status){
+                $brand->status =  $status;
+                /////AFECTAR ARTICULOS AL ACTIVAR O DESACTIVAR MARCA
+                $product= Product::where('brand_id', $brand->id)->get();
+
+                foreach ($product as $element) {
+                    // return $element;
+                    $element->status = $request->status;
+                    $element->save();
+                }
+
+            } 
 
             $brand->save();
+
+
 
             if($request->hasFile('image_url')){
                 $img = $request->file('image_url');

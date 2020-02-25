@@ -13,10 +13,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filter = $request->filter;
+        $sortOrder = $request->sortOrder;
+        $pageSize = $request->pageSize;
+        
         //
-        return User::all();
+        return User::orderBy('id', 'DESC')->paginate($pageSize);
     }
 
     /**
@@ -118,5 +122,14 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json($user, 200);
+    }
+
+
+
+
+    public function search(Request $request){
+
+        // $user = User::where('name')
+
     }
 }

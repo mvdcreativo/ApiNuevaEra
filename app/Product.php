@@ -19,7 +19,7 @@ class Product extends Model
         'description',
         'stock',
         'picture',
-        'state'
+        'status'
     ];
 
 

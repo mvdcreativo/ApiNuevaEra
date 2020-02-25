@@ -12,24 +12,19 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'description', 'state'
+        'name', 'slug', 'description', 'status'
     ];
 
 
     //relations
 
-    public function category()
-    {
-        return $this->belongsTo('App\Category');
-    }
-
-    public function categories()
-    {
-        return $this->hasMany('App\Category');
-    }
-
     public function products()
     {
         return $this->hasMany('App\Product');
+    }
+
+    public function brands()
+    {
+        return $this->belongsToMany('App\Brands');
     }
 }

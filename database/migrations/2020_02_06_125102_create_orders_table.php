@@ -18,13 +18,15 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->float('total');
             $table->string('name');
-            $table->string('lastname');
             $table->string('company')->nullable();
+            $table->string('ci');
+            $table->string('rut')->nullable();
+
             $table->string('address');
             $table->string('city');
-            $table->string('set_state');
+            $table->unsignedBigInteger('status_id');
             $table->string('state');
-            $table->string('mail');
+            $table->string('email');
             $table->string('phone');
 
             
@@ -32,6 +34,8 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
+
         });
 
 

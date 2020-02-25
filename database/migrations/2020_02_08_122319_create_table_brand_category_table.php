@@ -13,7 +13,7 @@ class CreateTableBrandCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('table_brand_category', function (Blueprint $table) {
+        Schema::create('brand_category', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('category_id');

@@ -11,20 +11,37 @@ class Brands_Table_Seeder extends Seeder
      */
     public function run()
     {
-        $json= File::get('database/data/categories.json');
+        $json= File::get('database/data/brands.json');
         $data= json_decode($json);
 
         foreach ($data as $campo) {
-            if($campo->category_id !== null){
-                
+            $brandSlug = str_slug($campo->name);
+            $brand = App\Brand::where('slug', $brandSlug)->first();
+            if($brand){
+                $brand->categories()->sync($campo->idCategory);
+                $brand->save();
+            }else{
+
+                if($campo->idStatus == 2){
+                    $status = "DIS";
+                }else{
+                    $status = "ACT";
+                };
+
                 $name = $campo->name;
-                $category = new App\Brand([
+                $brandNew = new App\Brand([
                     'id' => $campo->id,
                     'name'=> $name,
                     'slug'=> str_slug($name),
+                    'destaca'=> rand(0,1),
+                    "status" => $status,
                 ]);
-                $category->save();
+                $brandNew->save();
+                $brandNew->categories()->sync($campo->idCategory);
+                $brandNew->save();
+                
             }
+
             // $category->vehicle_categories()->sync(1);
         }
     }

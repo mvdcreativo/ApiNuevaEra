@@ -17,12 +17,10 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
-            $table->string('state')->default('ACT');
+            $table->string('status')->default('ACT');
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

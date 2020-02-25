@@ -127,8 +127,8 @@ class ProductController extends Controller
         $product->slug = $slug;
         $product->name_concat = $request->name_concat;
         $product->price = $request->price;
-        $product->price_mayorista = $request->price_mayorista;
-        $product->discount = $request->discount;
+       if($request->price_mayorista or $request->price_mayorista==0 ) $product->price_mayorista = $request->price_mayorista;
+       if($request->discount or $request->discount==0 ) $product->discount = $request->discount;
         $product->stock = $request->stock;
         $product->brand_id = $request->brand_id;
         $product->category_id = $request->category_id;
