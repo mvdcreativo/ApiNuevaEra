@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductFacebookExport;
+
 
 
 class ProductController extends Controller
@@ -161,5 +164,13 @@ class ProductController extends Controller
         $product->delete();
 
         return response()->json($product, 200);
+    }
+
+
+
+
+    public function exportFaceboock(){
+        return Excel::download(new ProductFacebookExport, 'da_catalog_commerce_commented_template.csv');
+
     }
 }

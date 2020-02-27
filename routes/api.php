@@ -43,5 +43,6 @@ Route::get('brand-by-slug/{slug}', 'Api\BrandController@brand_by_slug');
 Route::get('category-by-slug/{slug}', 'Api\CategoryController@bySlug');
 Route::get('product-by-slug/{slug}', 'Api\ProductController@bySlug');
 Route::get('search', 'Api\SearchController@search');
+Route::get('products-faceboock', 'Api\ProductController@exportFaceboock');
 
 // Route::get('import', 'Api\ImportImagesController@import');

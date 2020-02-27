@@ -49,7 +49,7 @@ class Products_Table_Seeder extends Seeder
                 };
                 
                 
-                $name = $campo->name;
+                $name = trim($campo->name);
                 $product = new App\Product([
             
                 'id' => $campo->id,
@@ -58,7 +58,7 @@ class Products_Table_Seeder extends Seeder
                 'name_concat'=> $name,
                 'brand_id'=> $marca,
                 'category_id' => $campo->category,
-                'description' => $campo->description,
+                'description' => trim(str_replace("\r\n", " ", $campo->description)),
                 'picture' => "images/productos/".$image,
                 'price' => intval($campo->price),
                 'status'=> $status,
