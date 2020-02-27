@@ -15,6 +15,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        
         $filter = $request->filter;
         $sortOrder = $request->sortOrder;
         $pageSize = $request->pageSize;

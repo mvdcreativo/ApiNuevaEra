@@ -5,9 +5,16 @@ namespace App\Http\Controllers\Api;
 use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,12 +22,24 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
+
+
+        $user = $request->user();
+        // return $user;
         $filter = $request->filter;
         $sortOrder = $request->sortOrder;
         $pageSize = $request->pageSize;
+
+        if($user->role === "ADM"){
+
+            return Order::with('status')->orderBy('id', 'DESC')->paginate($pageSize);
+        }else{
+
+            return Order::where('user_id', $user->id)->with('status')->orderBy('id', 'DESC')->paginate($pageSize);
+        }
         
         //
-        return Order::with('status')->orderBy('id', 'DESC')->paginate($pageSize);
+       
     }
 
     /**
