@@ -23,23 +23,28 @@ class ProductFacebookExport implements WithMapping, WithHeadings, FromCollection
  
     public function map($product): array
     {
+        if($product->description){
+            $description = $product->description;
+        }else{
+            $description = $product->name;
+        }
         return [
             $product->id,
-            trim($product->name) ,
-            trim(str_replace("\r\n", " ", $product->description)),
+            trim(ucwords(strtolower($product->name))) ,
+            trim(ucfirst(strtolower(str_replace("\r\n", " ", $product->description)))),
             "in stock" ,
             "new",
             $product->price."UYU",
             "https://nuevaerauruguay.com/producto/".$product->slug ,
             "https://api.nuevaerauruguay.com/storage/images/productos/".$product->picture,
-            trim($product->brand->name),
+            trim(ucwords(strtolower($product->brand->name)),
             null,
             null,
             null,
             null,
             null,
             null,
-            trim($product->category->name),
+            trim(ucwords(strtolower($product->category->name)),
             $product->price,
             null ,
             null,
