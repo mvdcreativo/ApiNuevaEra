@@ -16,4 +16,9 @@ class Status extends Model
     {
         return $this->hasMany('App\Order');
     }
+
+    public function message()
+    {
+        return $this->hasMany('App\Message');
+    }
 }
