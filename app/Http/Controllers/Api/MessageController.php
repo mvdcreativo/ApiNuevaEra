@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Message;
 use App\Mail\MessageContact;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,6 +34,13 @@ class MessageController extends Controller
             'phone'=> 'required',
             'message'=> 'required|min:3'
         ]);
+
+        $message= new Message;
+        $message->name = $request->name;
+        $message->email = $request->email;
+        $message->phone = $request->phone;
+        $message->message = $request->message;
+        $message->save();
         
         $mail_destino = "mvdcreativo@gmail.com";
 
@@ -40,7 +48,7 @@ class MessageController extends Controller
 
 
 
-        return "enviado";
+        return response()->json("mensaje enviado", 200);
 
     }
 

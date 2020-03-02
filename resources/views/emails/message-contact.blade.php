@@ -6,19 +6,20 @@
     <title>Mensaje desde la Web</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900&display=swap" rel="stylesheet">
     <style>
-        body{
+        #body{
             padding:0;
             margin:0;
-        }
-        body{
             font-family: 'Nunito', "Helvetica Neue", sans-serif;
             background-color:  #ffb031;
+            width:100%;
+            padding: 30px;
         }
-            h1{
+        h1{
             font-size: 20px;
         }
         .container{
-            margin-top:1rem;
+
+            margin-top:16px;
             margin-left:auto;
             margin-right: auto;
            width: 100%;
@@ -28,7 +29,7 @@
             -moz-box-shadow: 0px 0px 18px -4px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 18px -4px rgba(0,0,0,0.75);
             position: relative;
-            padding: 2rem;
+            padding: 32px;
             background-color:  #FFF;
         }
         .container.content{
@@ -38,14 +39,14 @@
         }
         .container.content p{
             width: 100%;
-            margin-bottom: 1rem!important;
+            margin-bottom: 16px!important;
         }
         .container.image{
             width:100%;
         }
         .container.image{
             width: 100%;
-            padding: 2rem;
+            padding: 32px;
             height: 300px;
             min-height: 300px;
             display: block;
@@ -60,21 +61,24 @@
     </style>
 </head>
 <body>
+<div id="body">
+    <div class="container">
+            <div class="content">
+                <h1>Mensaje recibido desde la Web</h1>
+                <p><strong>{{ $msg['name'] }}</strong> escribió...</p>
+                <p>{{ $msg['message'] }}</p>
+                <p>
+                <strong>Contactar a:</strong> <br>
+                    {{ $msg['email'] }} o via telefónica {{ $msg['phone'] }}
+                </p>        
+            </div>
+            <div class="image">
+            <!-- <img src="https://api.nuevaerauruguay.tk/storage/images/mails/bg-mail.png" alt=""> -->
+            
+                <img src="{{ asset('storage/images/mails/bg-mail.png') }}" alt="">
 
-<div class="container">
-        <div class="content">
-            <h1>Mensaje recibido desde la Web</h1>
-            <p><strong>{{ $msg['name'] }}</strong> escribió...</p>
-            <p>{{ $msg['message'] }}</p>
-            <p>
-            <strong>Contactar a:</strong> <br>
-                {{ $msg['email'] }} o via telefónica {{ $msg['phone'] }}
-            </p>        
-        </div>
-        <div class="image">
-            <img src="{{ asset('storage/images/mails/bg-mail.svg') }}" alt="">
-
-        </div>
+            </div>
+    </div>
 </div>
     
 </body>
