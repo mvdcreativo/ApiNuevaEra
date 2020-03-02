@@ -42,7 +42,7 @@ class MessageController extends Controller
         $message->message = $request->message;
         $message->save();
         
-        $mail_destino = "mvdcreativo@gmail.com";
+        $mail_destino = "sbonzini@picaportedesign.com";
 
         Mail::to($mail_destino)->queue(new MessageContact($msg));
 
