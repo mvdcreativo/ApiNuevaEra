@@ -32,10 +32,10 @@ class OrderController extends Controller
 
         if($user->role === "ADM"){
 
-            return Order::with('status')->orderBy('id', 'DESC')->paginate($pageSize);
+            return Order::with('status','productos')->orderBy('id', 'DESC')->paginate($pageSize);
         }else{
 
-            return Order::where('user_id', $user->id)->with('status')->orderBy('id', 'DESC')->paginate($pageSize);
+            return Order::where('user_id', $user->id)->with('status','productos')->orderBy('id', 'DESC')->paginate($pageSize);
         }
         
         //
@@ -88,9 +88,10 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        $order = Order::with('productos', 'status')->find($id);
+        return response()->json($order, 200);
     }
 
     /**
