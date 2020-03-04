@@ -30,8 +30,8 @@ class ProductFacebookExport implements WithMapping, WithHeadings, FromCollection
         }
         return [
             $product->id,
-            trim(ucwords(strtolower($product->name))),
-            trim(ucfirst(strtolower(str_replace("\r\n", " ", $description)))),
+            trim(ucwords(strtolower( "\"".$product->name."\""))),
+            trim(ucfirst(strtolower(str_replace("\r\n", " ", "\"".$description."\"")))),
             "in stock" ,
             "new",
             $product->price."UYU",

@@ -72,7 +72,7 @@ return [
         'csv'         => [
             'delimiter'              => ',',
             // 'enclosure'              => '"',
-            'enclosure'              => '',
+            'enclosure'              => '"',
             'escape_character'       => '\\',
             'contiguous'             => false,
             'input_encoding'         => 'UTF-8',
