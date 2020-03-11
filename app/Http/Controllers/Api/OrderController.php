@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api')->only('store','update','destroy');
+    // }
 
     /**
      * Display a listing of the resource.
@@ -62,6 +62,7 @@ class OrderController extends Controller
             $order = new Order;
             $order->user_id = $request->user_id;
             $order->name = $request->name;
+            $order->lastname = $request->lastname;
             $order->email = $request->email;
             $order->address = $request->address;
             $order->status_id = 2;
@@ -90,7 +91,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+        
         $order = Order::with('productos', 'status')->find($id);
+
         return response()->json($order, 200);
     }
 

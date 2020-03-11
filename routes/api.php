@@ -39,6 +39,8 @@ Route::apiResource('category', 'Api\CategoryController');
 Route::apiResource('product', 'Api\ProductController');
 Route::apiResource('order', 'Api\OrderController');
 Route::apiResource('send-message-contact', 'Api\MessageController');
+Route::apiResource('pay-methods', 'Api\PaymentMethodController');
+
 
 Route::get('brand-by-slug/{slug}', 'Api\BrandController@brand_by_slug');
 Route::get('category-by-slug/{slug}', 'Api\CategoryController@bySlug');
@@ -46,5 +48,11 @@ Route::get('product-by-slug/{slug}', 'Api\ProductController@bySlug');
 Route::get('search', 'Api\SearchController@search');
 
 Route::get('products-faceboock', 'Api\ProductController@exportFaceboock');
+
+
+Route::post('registro_cliente_cobrosya', 'Api\Cobrosya\EnvioPagosController@registrar_cliente');
+Route::post('crear_talon_cobrosya', 'Api\Cobrosya\EnvioPagosController@crear_talon');
+Route::post('user_tarjetas', 'Api\Cobrosya\EnvioPagosController@user_tarjetas');
+Route::post('navega-a-cobro', 'Api\Cobrosya\EnvioPagosController@navega_a_cobro');
 
 // Route::get('import', 'Api\ImportImagesController@import');

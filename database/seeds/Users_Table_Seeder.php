@@ -39,6 +39,7 @@ class Users_Table_Seeder extends Seeder
                 
                 'id' => $campo->id,
                 'name' => $campo->name,
+                'lastname' => $cliente->lastName,
                 'email' => $campo->email,
                 'email_verified_at' => now(),
                 'password' => $campo->password, // password
@@ -63,7 +64,8 @@ class Users_Table_Seeder extends Seeder
         $user = new App\User([
 
             
-            'name' => "Emir Mendez",
+            'name' => "Emir",
+            'lastname' => "Mendez",
             'email' => "mvdcreativo@gmail.com",
             'email_verified_at' => now(),
             'password' => bcrypt('dan23608'), // password

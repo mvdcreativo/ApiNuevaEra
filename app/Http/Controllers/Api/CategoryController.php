@@ -45,6 +45,7 @@ class CategoryController extends Controller
             $category = new Category;
             $category->name = $name;
             $category->slug = $slug;
+            
             $category->save();
 
             return response()->json($category, 200);
@@ -85,7 +86,7 @@ class CategoryController extends Controller
     public function update($id, Request $request)
     {
      
-
+        return $request->all();
         $name = $request->name;
         $slug = str_slug($name);
         $status = $request->status;
