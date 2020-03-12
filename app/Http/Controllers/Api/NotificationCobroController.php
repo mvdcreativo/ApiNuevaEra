@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\NotificationCobros;
+use App\NotificationCobro;
 
-class NotificationCobrosController extends Controller
+class NotificationCobroController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class NotificationCobrosController extends Controller
      */
     public function index()
     {
-        //
+        return NotificationCobros::all();
     }
 
     /**
@@ -27,9 +27,25 @@ class NotificationCobrosController extends Controller
     public function store(Request $request)
     {
         
-        $notification = new NotificationCobros;
-        $notification = $request->all();
+        $notification = new NotificationCobro;
+
+        $notification->accion = $request->accion;
+        $notification->nro_talon = $request->nro_talon;
+        $notification->id_medio_pago = $request->id_medio_pago;
+        $notification->medio_pago = $request->medio_pago;
+        $notification->moneda = $request->moneda;
+        $notification->monto = $request->monto;
+        $notification->fecha_hora = $request->fecha_hora;
+        $notification->cuotas_codigo = $request->cuotas_codigo;
+        $notification->cuotas_texto = $request->cuotas_texto;
+        $notification->autorizacion = $request->autorizacion;
+        $notification->id_compra = $request->id_compra;
+        $notification->digitos = $request->digitos;
+        $notification->vencimiento = $request->vencimiento;
+        $notification->firma = $request->firma;
+        
         $notification->save();
+        // return $notification;
         return response()->json("ok, recibido", 200);
 
     }

@@ -86,7 +86,7 @@ class CategoryController extends Controller
     public function update($id, Request $request)
     {
      
-        return $request->all();
+        // return $request->all();
         $name = $request->name;
         $slug = str_slug($name);
         $status = $request->status;

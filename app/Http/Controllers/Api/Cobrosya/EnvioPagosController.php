@@ -98,7 +98,7 @@ class EnvioPagosController extends Controller
         'moneda' => 858,
         'monto' => $request->order['total'],
         'fecha_vencimiento' => "",
-        'url_respuesta' => "http://localhost:4200/pages/finaliza-pago",
+        'url_respuesta' => $request->urlRedirect,
         'consumo_final' => 1,
         'factura' => $request->order['id'],
         'monto_gravado' => $request->order['total'],

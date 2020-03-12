@@ -20,11 +20,12 @@ class CreateNotificationCobrosTable extends Migration
             $table->string('medio_pago');
             $table->integer('moneda');
             $table->float('monto');   
-            $table->string('fecha');
+            $table->string('fecha_hora');
             $table->integer('cuotas_codigo')->nullable();
             $table->string('cuotas_texto')->nullable();
             $table->string('autorizacion')->nullable();
             $table->string('id_compra')->nullable();
+            $table->string('digitos')->nullable();
             $table->string('vencimiento')->nullable();
             $table->string('firma');
             $table->string('nro_talon');
