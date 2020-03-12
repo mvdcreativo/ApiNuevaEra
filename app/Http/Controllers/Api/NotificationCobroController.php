@@ -42,11 +42,12 @@ class NotificationCobroController extends Controller
         $notification->id_compra = $request->id_compra;
         $notification->digitos = $request->digitos;
         $notification->vencimiento = $request->vencimiento;
+        $notification->mensaje = $request->mensaje;
         $notification->firma = $request->firma;
         
         $notification->save();
         // return $notification;
-        return response()->json("ok, recibido", 200);
+        return response()->json(["message" => "ok recibido", "data" => $notification], 200);
 
     }
 
