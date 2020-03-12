@@ -14,7 +14,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->increments('id')->start_from(50000);
+            $table->increments('id');
             $table->unsignedBigInteger('user_id');
             $table->float('total');
             $table->string('name');
@@ -40,7 +40,7 @@ class CreateOrdersTable extends Migration
 
         });
 
-
+        DB::statement("ALTER TABLE orders AUTO_INCREMENT = 50000;");
     }
 
     /**

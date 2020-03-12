@@ -29,6 +29,7 @@ class CreateNotificationCobrosTable extends Migration
             $table->string('vencimiento')->nullable();
             $table->string('firma');
             $table->string('nro_talon');
+            $table->string('mensaje')->nullable();
             $table->timestamps();
 
         });

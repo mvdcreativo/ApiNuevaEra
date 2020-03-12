@@ -244,8 +244,8 @@ class EnvioPagosController extends Controller
         $key = file_get_contents(storage_path().env('PRIVATE_KEY_CY'));
         $data_a_firmar = [
                 $request->nro_talon,
-                $request->order['payment_method_id'],
-                $request->user['id_cliente_cobrosya'],
+                $request->method,
+                $request->user,
                 $request->cuotas,
                 '',
                 '',
