@@ -39,12 +39,17 @@ class BrandController extends Controller
     {
 
         
-
+// return $request->all();
         $this->validate($request, [
             'name' => ['required']
         ]);
         $name = $request->name;
         $slug = str_slug($name);
+        if($request->destaca){
+            $destaca = $request->destaca;
+        }else{
+            $destaca = 1;
+        };
         $destaca = $request->destaca;
         $description= $request->description;
 
