@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api\Cobrosya;
+use App\Order;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -84,25 +85,25 @@ class EnvioPagosController extends Controller
         ///fichero ubicado en storage nombre en variable de entorno
         $key = file_get_contents(storage_path().env('PRIVATE_KEY_CY'));
 
-
+        // return $request->order['id'];
         $talon = [
         'token' => "f063a59d610c3900f78fc5874369ca2d",
-        'id_transaccion' => $request->order->id,
-        'id_cliente_cobrosya' => $request->user->id_cliente_cobrosya,
-        'nombre' => $request->order->name,
-        'apellido' => $request->order->lastname,
-        'email' => $request->order->email,
-        'celular' => $request->order->phone,
-        'concepto' => "Orden Nº.: ".$request->order->id,
+        'id_transaccion' => $request->order['id'],
+        'id_cliente_cobrosya' => $request->user['id_cliente_cobrosya'],
+        'nombre' => $request->order['name'],
+        'apellido' => $request->order['lastname'],
+        'email' => $request->order['email'],
+        'celular' => $request->order['phone'],
+        'concepto' => "Orden Nº.: ".$request->order['id'],
         'moneda' => 858,
-        'monto' => $request->order->total,
+        'monto' => $request->order['total'],
         'fecha_vencimiento' => "",
-        'url_respuesta' => "http://nuevaerauruguay.picaworks.com/pages/finaliza-pago",
+        'url_respuesta' => "http://localhost:4200/pages/finaliza-pago",
         'consumo_final' => 1,
-        'factura' => $request->order->id,
-        'monto_gravado' => $request->order->total,
+        'factura' => $request->order['id'],
+        'monto_gravado' => $request->order['total'],
         ];
-        return $request->all();
+        
 
 
         $data_a_firmar = [ 
@@ -119,7 +120,7 @@ class EnvioPagosController extends Controller
         $firma = FirmaCobrosyaTrait::cobrosyaFirmar($key, $data_a_firmar);
         $talon['firma'] = $firma;
 
-
+ 
 
 
         $options = [
@@ -127,12 +128,22 @@ class EnvioPagosController extends Controller
         ];
         // return $array;
 
-        $client = new Client();
+        
 
+        $client = new Client();
         $response = $client->request('POST', 'http://api-sandbox5.cobrosya.com/v5.5/ws-crear-talon', $options );
 
-        return $body = json_decode($response->getBody(), true);
+        $respuesta = json_decode($response->getBody(), true);
 
+
+        $order = Order::find($request->order['id']);
+        $order->talon_cobro = $respuesta['nro_talon'];
+        $order->url_pdf = $respuesta['url_pdf'];
+        $order->status_id = 3;
+        $order->payment_method_id = $request->method;
+        $order->save();
+
+        return $respuesta;
     }
 
 
@@ -141,7 +152,7 @@ class EnvioPagosController extends Controller
     // TARJETAS
     /////////////
 
-    public function user_tarjetas(){
+    public function user_tarjetas(Request $request){
 
         ///fichero ubicado en storage nombre en variable de entorno
         $key = file_get_contents(storage_path().env('PRIVATE_KEY_CY'));
@@ -180,16 +191,18 @@ class EnvioPagosController extends Controller
     // URL COBRO
     /////////////
 
-    public function navega_a_cobro(){
-
+    public function navega_a_cobro(Request $request){
+        // return Redirect::to('http://api-sandbox5.cobrosya.com/v5.5/cobrar-talon');
         ///fichero ubicado en storage nombre en variable de entorno
+
+        
         $key = file_get_contents(storage_path().env('PRIVATE_KEY_CY'));
 
         $cobro = [
-            'nro_talon' => 1266553,
-            'id_medio_pago' => 3,
-            'id_cliente_cobrosya' => '00718949-f2b4-4e95-ba08-9e398bb5b8cc',
-            'cuotas' => '',
+            'nro_talon' => $request->order['talon_cobro'],
+            'id_medio_pago' => $request->order['payment_method_id'],
+            'id_cliente_cobrosya' => $request->user['id_cliente_cobrosya'],
+            'cuotas' => $request->cuotas,
             'id_tarjeta' => '',
             'cvv2' => '',
             'terminal' => '', 
@@ -208,7 +221,7 @@ class EnvioPagosController extends Controller
 
         $firma = FirmaCobrosyaTrait::cobrosyaFirmar($key, $data_a_firmar);
         $cobro['firma'] = $firma;
-
+        
         $options = [
             'form_params' => $cobro
         ];
@@ -218,8 +231,32 @@ class EnvioPagosController extends Controller
 
         $response = $client->request('POST', 'http://api-sandbox5.cobrosya.com/v5.5/cobrar-talon', $options );
 
+        // return redirect()->away('http://api-sandbox5.cobrosya.com/v5.5/cobrar-talon');
+        
+
         return $body = json_decode($response->getBody(), true);
         
     }
+
+
+    public function firma(Request $request){
+
+        $key = file_get_contents(storage_path().env('PRIVATE_KEY_CY'));
+        $data_a_firmar = [
+                $request->nro_talon,
+                $request->order['payment_method_id'],
+                $request->user['id_cliente_cobrosya'],
+                $request->cuotas,
+                '',
+                '',
+                '',
+            
+        ];
+
+
+        $firma = FirmaCobrosyaTrait::cobrosyaFirmar($key, $data_a_firmar);
+
+        return response()->json($firma, 200);    }
+
 
 }

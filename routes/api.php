@@ -54,5 +54,7 @@ Route::post('registro_cliente_cobrosya', 'Api\Cobrosya\EnvioPagosController@regi
 Route::post('crear_talon_cobrosya', 'Api\Cobrosya\EnvioPagosController@crear_talon');
 Route::post('user_tarjetas', 'Api\Cobrosya\EnvioPagosController@user_tarjetas');
 Route::post('navega-a-cobro', 'Api\Cobrosya\EnvioPagosController@navega_a_cobro');
+Route::post('firma-cobrosya', 'Api\Cobrosya\EnvioPagosController@firma');
+
 
 // Route::get('import', 'Api\ImportImagesController@import');

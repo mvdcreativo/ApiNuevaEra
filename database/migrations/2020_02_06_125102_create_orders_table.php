@@ -14,7 +14,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigIncrements('id')->start_from(50000);
+            $table->increments('id')->start_from(50000);
             $table->unsignedBigInteger('user_id');
             $table->float('total');
             $table->string('name');
@@ -28,13 +28,13 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('talon_cobro')->nullable();
+            $table->string('url_pdf')->nullable();
             $table->bigInteger('payment_method_id')->nullable();
             $table->unsignedBigInteger('status_id');
 
             
 
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
 

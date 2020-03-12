@@ -20,4 +20,9 @@ class Order extends Model
     {
         return $this->belongsTo('App\Status');
     }
+
+    public function nro_talon()
+    {
+        return $this->hasOne('App\NotificationCobros', 'nro_talon', 'talon_cobro');
+    }
 }

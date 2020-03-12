@@ -1,1 +1,2 @@
 *.sqlite
+/migrations/2020_03_01_221256_create_jobs_table.php

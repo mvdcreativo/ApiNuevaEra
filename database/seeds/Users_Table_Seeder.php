@@ -63,7 +63,7 @@ class Users_Table_Seeder extends Seeder
 
         $user = new App\User([
 
-            
+            'id' => 7000,
             'name' => "Emir",
             'lastname' => "Mendez",
             'email' => "mvdcreativo@gmail.com",
