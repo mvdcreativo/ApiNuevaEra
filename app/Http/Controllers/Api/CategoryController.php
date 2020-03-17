@@ -72,7 +72,8 @@ class CategoryController extends Controller
 
      public function bySlug($slug){
          $category = Category::with('products')->where('slug', $slug)->first();
-
+         $category->visits = $category->visits + 1;
+         $category->save();
          return response()->json($category, 200);
      }
 

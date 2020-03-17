@@ -94,9 +94,11 @@ class ProductController extends Controller
 
     public function bySlug($slug)
     {
-        
+        $product = Product::where('slug', $slug)->first();
+        $product->visits = $product->visits + 1;
+        $product->save();
 
-        return Product::where('slug', $slug)->first();
+        return $product;
     }
     /**
      * Update the specified resource in storage.

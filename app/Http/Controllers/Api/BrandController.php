@@ -24,6 +24,8 @@ class BrandController extends Controller
 
     public function brand_by_slug($slug){
         $brand = Brand::with('products')->where('slug', $slug)->where('status', 'ACT')->first();
+        $brand->visits = $brand->visits + 1;
+        $brand->save();
         return response()->json($brand, 200);
     }
 
