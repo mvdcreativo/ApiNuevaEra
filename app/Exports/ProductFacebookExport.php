@@ -36,6 +36,8 @@ class ProductFacebookExport implements WithMapping, WithHeadings, FromCollection
 
         if( $product->category && $product->category->name){
             $category = $product->category->name;
+        }else{
+            $category = "sin-categoria"
         }
 
         return [
