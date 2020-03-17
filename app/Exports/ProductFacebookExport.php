@@ -31,12 +31,14 @@ class ProductFacebookExport implements WithMapping, WithHeadings, FromCollection
         if($product->brand && $product->brand->name ){
             $brand = $product->brand->name;
         }else{
+            $product->delete();
             $brand = "sin-marca";
         }
 
         if( $product->category && $product->category->name){
             $category = $product->category->name;
         }else{
+            $product->delete();
             $category = "sin-categoria";
         }
 
