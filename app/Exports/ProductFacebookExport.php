@@ -28,11 +28,16 @@ class ProductFacebookExport implements WithMapping, WithHeadings, FromCollection
         }else{
             $description = $product->name;
         }
-        if($product->brand && $product->brand->name){
+        if($product->brand && $product->brand->name ){
             $brand = $product->brand->name;
         }else{
             $brand = "sin-marca";
         }
+
+        if( $product->category && $product->category->name){
+            $category = $product->category->name;
+        }
+
         return [
             $product->id,
             trim(ucwords(strtolower( "\"".$product->name."\""))),
@@ -50,7 +55,7 @@ class ProductFacebookExport implements WithMapping, WithHeadings, FromCollection
             null,
             null,
             null,
-            trim(ucwords(strtolower($product->category->name))),
+            trim(ucwords(strtolower($category))),
             $product->price,
             null ,
             null,
