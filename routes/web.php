@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/mercado-pago/{order_id}', 'CheckoutController@createOrder')->name('mercadopago');
