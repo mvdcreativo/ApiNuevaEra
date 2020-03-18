@@ -48,7 +48,7 @@ class NotificationCobroController extends Controller
         
         $notification->save();
         // return $notification;
-        return response()->json("ok", 200);
+        return response()->json(200);
         // $notification = new NotificationCobro;
 
         // $notification->accion = $request->accion;
