@@ -72,13 +72,13 @@ class MercadoPago
       # Save External Reference
       $preference->external_reference = "Nº de orden";
       $preference->back_urls = [
-        "success" => 'http://nuevaerauruguay.tk',
-        "pending" => 'http://nuevaerauruguay.tk',
-        "failure" => 'http://nuevaerauruguay.tk',
+        "success" => 'http://nuevaerauruguay.com',
+        "pending" => 'http://nuevaerauruguay.com',
+        "failure" => 'http://nuevaerauruguay.com',
       ];
         
       $preference->auto_return = "all";
-      $preference->notification_url = 'http://nuevaerauruguay.tk';
+    //   $preference->notification_url = 'http://nuevaerauruguay.tk';
       # Save and POST preference
       $preference->save();
 
