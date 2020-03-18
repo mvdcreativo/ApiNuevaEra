@@ -46,39 +46,45 @@ class MercadoPago
       # Create an item object
       $items = Array();
 
-      foreach ($order->productos as $value) {
+    //   foreach ($order->productos as $value) {
+    //     $item = new Item();
+    //     $item->id = $value->id;
+    //     $item->title = $value->name;
+    //     $item->quantity = $value->pivot->quantity;
+    //     $item->currency_id = 'UYU';
+    //     $item->unit_price = $value->pivot->price;
+    //     $item->picture_url = asset("storage/".$value->picture);
+
+    //     $items[] = $item;
+    //   }
         $item = new Item();
-        $item->id = $value->id;
-        $item->title = $value->name;
-        $item->quantity = $value->pivot->quantity;
+        $item->id = 12456;
+        $item->title = "NOMBRE";
+        $item->quantity = 1;
         $item->currency_id = 'UYU';
-        $item->unit_price = $value->pivot->price;
-        $item->picture_url = asset("storage/".$value->picture);
-
-        $items[] = $item;
-      }
-
+        $item->unit_price = 5200;
+        $item->picture_url = asset("storage/");
 
     
 
       # Create a payer object
       $payer = new Payer();
-      $payer->email = "email@cliente.com";
+      $payer->email = $order->email;
 
       # Setting preference properties
-      $preference->items = $items;
+      $preference->items = [$item];
       $preference->payer = $payer;
 
       # Save External Reference
-      $preference->external_reference = "Nº de orden";
+      $preference->external_reference = $order->id;
       $preference->back_urls = [
-        "success" => 'http://nuevaerauruguay.com',
-        "pending" => 'http://nuevaerauruguay.com',
-        "failure" => 'http://nuevaerauruguay.com',
+        "success" => env('MP_URL_SUCCESS'),
+        "pending" => env('MP_URL_PENDING'),
+        "failure" => env('MP_URL_FAILURE'),
       ];
         
       $preference->auto_return = "all";
-    //   $preference->notification_url = 'http://nuevaerauruguay.tk';
+      $preference->notification_url = 'http://nuevaerauruguay.tk';
       # Save and POST preference
       $preference->save();
 

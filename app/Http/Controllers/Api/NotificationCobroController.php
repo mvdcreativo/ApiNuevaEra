@@ -18,25 +18,13 @@ class NotificationCobroController extends Controller
 
         $notification = new NotificationCobro;
 
-        $notification->accion = $request->accion;
-        $notification->nro_talon = $request->nro_talon;
-        $notification->id_medio_pago = $request->id_medio_pago;
-        $notification->medio_pago = $request->medio_pago;
-        $notification->moneda = $request->moneda;
-        $notification->monto = $request->monto;
-        $notification->fecha_hora = $request->fecha_hora;
-        $notification->cuotas_codigo = $request->cuotas_codigo;
-        $notification->cuotas_texto = $request->cuotas_texto;
-        $notification->autorizacion = $request->autorizacion;
-        $notification->id_compra = $request->id_compra;
-        $notification->digitos = $request->digitos;
-        $notification->vencimiento = $request->vencimiento;
-        $notification->mensaje = $request->mensaje;
-        $notification->firma = $request->firma;
+        $notification->accion = $request->topic;
+        $notification->nro_talon = $request->id;
+
         
         $notification->save();
         // return $notification;
-        return response()->json(["message" => "ok recibido", "data" => $notification], 200);
+        return response()->json("ok", 200);
 
         // return NotificationCobros::all();
     }

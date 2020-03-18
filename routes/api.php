@@ -40,7 +40,7 @@ Route::apiResource('product', 'Api\ProductController');
 Route::apiResource('order', 'Api\OrderController');
 Route::apiResource('send-message-contact', 'Api\MessageController');
 Route::apiResource('pay-methods', 'Api\PaymentMethodController');
-Route::apiResource('notification_cobrosya', 'Api\NotificationCobroController');
+Route::apiResource('notification-cobro', 'Api\NotificationCobroController');
 
 
 Route::get('brand-by-slug/{slug}', 'Api\BrandController@brand_by_slug');
@@ -56,6 +56,7 @@ Route::post('crear_talon_cobrosya', 'Api\Cobrosya\EnvioPagosController@crear_tal
 Route::post('user_tarjetas', 'Api\Cobrosya\EnvioPagosController@user_tarjetas');
 Route::post('navega-a-cobro', 'Api\Cobrosya\EnvioPagosController@navega_a_cobro');
 Route::post('firma-cobrosya', 'Api\Cobrosya\EnvioPagosController@firma');
+
 
 
 // Route::get('import', 'Api\ImportImagesController@import');
