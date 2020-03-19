@@ -84,7 +84,7 @@ class MercadoPago
       ];
         
       $preference->auto_return = "all";
-      $preference->notification_url = 'https://api.nuevaerauruguay.tk/api/notification-cobro';
+      $preference->notification_url = env('MP_URL_NOTIFICACION');
       # Save and POST preference
       $preference->save();
 

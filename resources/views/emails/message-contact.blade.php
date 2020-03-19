@@ -73,7 +73,7 @@
                 </p>        
             </div>
             <div class="image">
-            <!-- <img src="https://api.nuevaerauruguay.tk/storage/images/mails/bg-mail.png" alt=""> -->
+            <!-- <img src="https://api.nuevaerauruguay.com/storage/images/mails/bg-mail.png" alt=""> -->
             
                 <img src="{{ asset('storage/images/mails/bg-mail.png') }}" alt="">
 
