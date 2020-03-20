@@ -15,21 +15,9 @@ class CreateNotificationCobrosTable extends Migration
     {
         Schema::create('notification_cobros', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('accion');
-            $table->integer('id_medio_pago');
-            $table->string('medio_pago');
-            $table->integer('moneda');
-            $table->float('monto');   
-            $table->string('fecha_hora');
-            $table->integer('cuotas_codigo')->nullable();
-            $table->string('cuotas_texto')->nullable();
-            $table->string('autorizacion')->nullable();
-            $table->string('id_compra')->nullable();
-            $table->string('digitos')->nullable();
-            $table->string('vencimiento')->nullable();
-            $table->string('firma');
-            $table->string('nro_talon');
-            $table->string('mensaje')->nullable();
+            $table->string('topyc');
+            $table->integer('id_notificacion');
+
             $table->timestamps();
 
         });

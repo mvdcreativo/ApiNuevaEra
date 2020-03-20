@@ -42,11 +42,12 @@ class NotificationCobroController extends Controller
         
         $notification = new NotificationCobro;
 
-        $notification->accion = $request->topic;
-        $notification->nro_talon = $request->id;
+        $notification->topyc = $request->topic;
+        $notification->id_notificacion = $request->id;
+        $notification->save();
+
 
         
-        $notification->save();
         // return $notification;
         return response()->json(200);
         // $notification = new NotificationCobro;
