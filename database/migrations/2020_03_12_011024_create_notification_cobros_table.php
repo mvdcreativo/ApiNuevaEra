@@ -15,7 +15,7 @@ class CreateNotificationCobrosTable extends Migration
     {
         Schema::create('notification_cobros', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('topyc');
+            $table->string('topic');
             $table->integer('id_notificacion');
 
             $table->timestamps();

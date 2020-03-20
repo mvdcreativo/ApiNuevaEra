@@ -18,8 +18,8 @@ class NotificationCobroController extends Controller
 
         $notification = new NotificationCobro;
 
-        $notification->accion = $request->topic;
-        $notification->nro_talon = $request->id;
+        $notification->topic = $request->topic;
+        $notification->id_notificacion = $request->id;
 
         
         $notification->save();
