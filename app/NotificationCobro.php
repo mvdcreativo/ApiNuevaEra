@@ -8,7 +8,7 @@ class NotificationCobro extends Model
 {
 
     protected $fillable = [ 
-        'topyc',
+        'topic',
         'id_notificacion',
 
     ];

@@ -46,34 +46,47 @@ class MercadoPago
       # Create an item object
       $items = Array();
 
-    //   foreach ($order->productos as $value) {
-    //     $item = new Item();
-    //     $item->id = $value->id;
-    //     $item->title = $value->name;
-    //     $item->quantity = $value->pivot->quantity;
-    //     $item->currency_id = 'UYU';
-    //     $item->unit_price = $value->pivot->price;
-    //     $item->picture_url = asset("storage/".$value->picture);
-
-    //     $items[] = $item;
-    //   }
+      foreach ($order->productos as $value) {
         $item = new Item();
-        $item->id = 12456;
-        $item->title = "NOMBRE";
-        $item->quantity = 1;
+        $item->id = $value->id;
+        $item->title = $value->name;
+        $item->quantity = $value->pivot->quantity;
         $item->currency_id = 'UYU';
-        $item->unit_price = 5200;
-        $item->picture_url = asset("storage/");
+        $item->unit_price = $value->pivot->price;
+        $item->picture_url = asset("storage/".$value->picture);
+
+        $items[] = $item;
+      }
+        // $item = new Item();
+        // $item->id = 12456;
+        // $item->title = "NOMBRE";
+        // $item->quantity = 1;
+        // $item->currency_id = 'UYU';
+        // $item->unit_price = 5200;
+        // $item->picture_url = asset("storage/");
 
     
 
       # Create a payer object
       $payer = new Payer();
       $payer->email = $order->email;
+      $payer->name = $order->name;
+      $payer->surname = $order->lastname;
+      $payer->phone = array(
+        "area_code" => "598",
+        "number" => $order->phone
+      );
+      
+      $payer->identification = array(
+        "type" => "CI",
+        "number" => $order->ci
+      );
+      
 
       # Setting preference properties
-      $preference->items = [$item];
+      $preference->items = $items;
       $preference->payer = $payer;
+      
 
       # Save External Reference
       $preference->external_reference = $order->id;
