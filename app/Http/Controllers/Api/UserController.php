@@ -85,13 +85,24 @@ class UserController extends Controller
      */
     public function update($id, Request $request )
     {
+
+
+        if($request->password){
+            $user = User::find($id);
+            $user->password = $request->password;
+            return response()->json(["message" => "Contraseña actualizada"], 200);
+        }
+
         $name = $request->name;
         $email = $request->email;
         $validateUser = User::where('email', $email)->where('id', '!=', $id)->get();
 
 
+        
+
+
         if(count($validateUser)>=1){
-            return response()->json(["message" => "El Usuaio ".$name." ya existe!!!"], 400);
+            return response()->json(["message" => "El Usuaio con correo ".$email." ya existe!!!"], 400);
         }else{
 
             $user = User::find($id);

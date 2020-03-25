@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\NotificationCobro;
+use GuzzleHttp\Client;
+
 
 class NotificationCobroController extends Controller
 {
@@ -42,14 +44,33 @@ class NotificationCobroController extends Controller
         
         $notification = new NotificationCobro;
 
-        $notification->topyc = $request->topic;
+        $notification->topic = $request->topic;
         $notification->id_notificacion = $request->id;
         $notification->save();
 
 
+        if($notification->topic === "payment"){
+            
+            $id = $notification->id;
+            $client = new Client();
+
+            $response = $client->request('GET','https://api.mercadopago.com/v1/payments/'.$id.'?access_token='.env('MP_TOKEN'));
+
+
+            $respuesta = json_decode($response->getBody(), true);
+
+            // payment_type_id
+            // payment_method_id
+            // external_reference
+            // status
+            // status_detail
+            // transaction_details->total_paid_amount
+            //                     ->net_received_amount
+
+        }
         
         // return $notification;
-        return response()->json(200);
+        return response()->json("ok", 200);
         // $notification = new NotificationCobro;
 
         // $notification->accion = $request->accion;

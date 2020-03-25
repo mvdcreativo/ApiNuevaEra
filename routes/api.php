@@ -58,5 +58,13 @@ Route::post('navega-a-cobro', 'Api\Cobrosya\EnvioPagosController@navega_a_cobro'
 Route::post('firma-cobrosya', 'Api\Cobrosya\EnvioPagosController@firma');
 
 
-
+Route::group([    
+    'namespace' => 'Api\Auth',    
+    'middleware' => 'api',    
+    'prefix' => 'password'
+], function () {    
+    Route::post('create', 'PasswordResetController@create');
+    Route::get('find/{token}', 'PasswordResetController@find');
+    Route::post('reset', 'PasswordResetController@reset');
+});
 // Route::get('import', 'Api\ImportImagesController@import');

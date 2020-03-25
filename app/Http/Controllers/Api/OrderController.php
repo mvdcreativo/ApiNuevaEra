@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api')->only('store','update','destroy');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
 
     /**
      * Display a listing of the resource.
@@ -24,8 +24,8 @@ class OrderController extends Controller
     {
 
 
-        $user = $request->user();
-        // return $user;
+        $user = Auth::user();
+        // return [$user];
         $filter = $request->filter;
         $sortOrder = $request->sortOrder;
         $pageSize = $request->pageSize;
@@ -104,9 +104,30 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request,$id)
     {
         //
+        
+        $order = Order::find($id);
+        // $order->user_id = $request->user_id;
+        // $order->name = $request->name;
+        // $order->lastname = $request->lastname;
+        // $order->email = $request->email;
+        if($request->address) $order->address = $request->address;
+        if($request->status_id) $order->status_id = 2;
+        if($request->city) $order->city = $request->city;
+        if($request->state) $order->state = $request->state;
+        if($request->phone) $order->phone = $request->phone;
+        if($request->rut) $order->rut = $request->rut;
+        if($request->company) $order->company = $request->company;
+        // if($request->total) $order->total = $request->total;
+        $order->save();
+
+
+        foreach ($request->get('products') as $value) {
+            $order->productos()->attach($value);
+        }
+        return response()->json($order, 200);
     }
 
     /**
