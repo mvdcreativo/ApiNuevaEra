@@ -91,7 +91,7 @@ class PasswordResetController extends Controller
                 'message' => 'Este token de restablecimiento de contraseña no es válido.'
             ], 404);
         }
-        return redirect(env('FRONT_WEB')."acceder?email=".$passwordReset->email."&token=".$passwordReset->token);
+        return Redirect::to(env('FRONT_WEB')."acceder?email=".$passwordReset->email."&token=".$passwordReset->token);
         // return response()->json($passwordReset);
     }
 
