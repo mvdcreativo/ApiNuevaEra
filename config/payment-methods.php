@@ -13,6 +13,7 @@ return [
         'display' => 'MercadoPago',
         'client' => env('MP_CLIENT'),
         'secret' => env('MP_SECRET'),
+        'access_token' => env('MP_TOKEN'),
     ],
 
 

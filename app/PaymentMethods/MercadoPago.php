@@ -16,35 +16,25 @@ class MercadoPago
 {
   public function __construct()
   {
-    SDK::setClientId(
-          config("payment-methods.mercadopago.client")
+    SDK::setAccessToken(
+          config("payment-methods.mercadopago.access_token")
      );
-    SDK::setClientSecret(
-          config("payment-methods.mercadopago.secret")
-     );
+    // SDK::setClientSecret(
+    //       config("payment-methods.mercadopago.secret")
+    //  );
   }
 
-  private function map($v){
-    $item = new Item();
-    $item->id = $v->id;
-    $item->title = $v->name;
-    $item->quantity = $v->pivot->quantity;
-    $item->currency_id = 'UYU';
-    $item->unit_price = $v->pivot->price;
-    $item->picture_url = assets("storage/".$v->picture);
-    return $item;
-  }
-    
   public function setupPaymentAndGetRedirectURL(Order $order): string
   {
      # Create a preference object
      $preference = new Preference();
-    // return($order);
+    // dd($order);
+    
     
 
 
       # Create an item object
-      $items = Array();
+      // $items = Array();
 
       foreach ($order->productos as $value) {
         $item = new Item();
@@ -97,8 +87,9 @@ class MercadoPago
       ];
         
       $preference->auto_return = "all";
-      $preference->notification_url = env('MP_URL_NOTIFICACION');
+      $preference->notification_url = "https://api.nuevaerauruguay.com/api/notification-cobro";
       # Save and POST preference
+      // dd($preference);
       $preference->save();
 
       if (config('payment-methods.use_sandbox')) {
