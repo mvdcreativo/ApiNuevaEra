@@ -49,7 +49,7 @@ class PasswordResetController extends Controller
             $msg = [
                 'subject' => 'Nueva Era - Restablecimiento de contraseña',
                 'title' => 'Cambiamos tu contraseña?',
-                'paragraph' => 'Enviamos este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.',
+                'paragraph' => 'Enviamos este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta. <br> Esta solicitud es valida por 12hs.',
                 'button' => [ 
                     'button_name' => 'Crear contraseña',
                     'button_link' => url('/api/password/find/'.$passwordReset->token)
@@ -62,7 +62,7 @@ class PasswordResetController extends Controller
             // );
 
             return response()->json([
-                'message' => '¡Hemos enviado su enlace de restablecimiento de contraseña por correo electrónico!'
+                'message' => '¡Hemos enviado un enlace de restablecimiento por correo electrónico!'
             ]);
         }
     }
@@ -82,14 +82,17 @@ class PasswordResetController extends Controller
     {
         $passwordReset = PasswordReset::where('token', $token)->first();
         if (!$passwordReset)
-            return response()->json([
-                'message' => 'Este token de restablecimiento de contraseña no es válido.'
-            ], 404);
+            return redirect()->away("https://nuevaerauruguay.com/acceder?error='Este token de restablecimiento de contraseña no es válido.'");
+            // return response()->json([
+            //     'message' => 'Este token de restablecimiento de contraseña no es válido.'
+            // ], 404);
         if (Carbon::parse($passwordReset->updated_at)->addMinutes(720)->isPast()) {
             $passwordReset->delete();
-            return response()->json([
-                'message' => 'Este token de restablecimiento de contraseña no es válido.'
-            ], 404);
+            return redirect()->away("https://nuevaerauruguay.com/acceder?error='Este token de restablecimiento de contraseña no es válido.'");
+
+            // return response()->json([
+            //     'message' => 'Este token de restablecimiento de contraseña no es válido.'
+            // ], 404);
         }
         return redirect()->away("https://nuevaerauruguay.com/acceder?email=".$passwordReset->email."&token=".$passwordReset->token);
         // return response()->json($passwordReset);

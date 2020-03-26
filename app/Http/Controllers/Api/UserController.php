@@ -89,7 +89,7 @@ class UserController extends Controller
 
         if($request->password){
             $user = User::find($id);
-            $user->password = $request->password;
+            $user->password = bcrypt($request->password);
             return response()->json(["message" => "Contraseña actualizada"], 200);
         }
 
