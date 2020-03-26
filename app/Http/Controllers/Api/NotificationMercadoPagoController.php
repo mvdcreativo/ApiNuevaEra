@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\NotificationCobro;
+use App\NotificationMercadoPago;
 use GuzzleHttp\Client;
 
 
-class NotificationCobroController extends Controller
+class NotificationMercadoPagoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class NotificationCobroController extends Controller
     public function index(Request $request)
     {
 
-        $notification = new NotificationCobro;
+        $notification = new NotificationMercadoPago;
 
         $notification->topic = $request->topic;
         $notification->id_notificacion = $request->id;
@@ -28,7 +28,7 @@ class NotificationCobroController extends Controller
         // return $notification;
         return response()->json("ok", 200);
 
-        // return NotificationCobros::all();
+        // return NotificationMercadoPagos::all();
     }
 
     /**
@@ -42,7 +42,7 @@ class NotificationCobroController extends Controller
         
 
         
-        $notification = new NotificationCobro;
+        $notification = new NotificationMercadoPago;
 
         $notification->topic = $request->topic;
         $notification->id_notificacion = $request->id;
@@ -71,7 +71,7 @@ class NotificationCobroController extends Controller
         
         // return $notification;
         return response()->json("ok", 200);
-        // $notification = new NotificationCobro;
+        // $notification = new NotificationMercadoPago;
 
         // $notification->accion = $request->accion;
         // $notification->nro_talon = $request->nro_talon;

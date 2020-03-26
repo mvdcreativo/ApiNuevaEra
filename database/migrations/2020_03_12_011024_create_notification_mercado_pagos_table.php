@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotificationCobrosTable extends Migration
+class CreateNotificationMercadoPagosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateNotificationCobrosTable extends Migration
      */
     public function up()
     {
-        Schema::create('notification_cobros', function (Blueprint $table) {
+        Schema::create('notification_mercado_pagos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('topic');
             $table->integer('id_notificacion');
+            $table->integer('visto')->nullable();
 
             $table->timestamps();
 
@@ -30,6 +31,6 @@ class CreateNotificationCobrosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notification_cobros');
+        Schema::dropIfExists('notification_mercado_pagos');
     }
 }
