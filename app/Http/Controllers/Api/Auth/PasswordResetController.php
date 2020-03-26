@@ -49,7 +49,7 @@ class PasswordResetController extends Controller
             $msg = [
                 'subject' => 'Nueva Era - Restablecimiento de contraseña',
                 'title' => 'Cambiamos tu contraseña?',
-                'paragraph' => 'Enviamos este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta. <br> Esta solicitud es valida por 12hs.',
+                'paragraph' => 'Enviamos este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta. Esta solicitud es válida por 12hs.',
                 'button' => [ 
                     'button_name' => 'Crear contraseña',
                     'button_link' => url('/api/password/find/'.$passwordReset->token)
@@ -62,7 +62,7 @@ class PasswordResetController extends Controller
             // );
 
             return response()->json([
-                'message' => '¡Hemos enviado un enlace de restablecimiento por correo electrónico!'
+                'message' => '¡Hemos enviado un enlace por correo electrónico!'
             ]);
         }
     }
