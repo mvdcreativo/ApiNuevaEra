@@ -2201,16 +2201,16 @@
         },
         {
             "name": "mercadopago/dx-php",
-            "version": "1.8.0",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mercadopago/dx-php.git",
-                "reference": "0986581bba62e24491febea37f0f5c000fb03ced"
+                "reference": "cb98165fdd4806d0b21a9ef1194b77f5abca31dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mercadopago/dx-php/zipball/0986581bba62e24491febea37f0f5c000fb03ced",
-                "reference": "0986581bba62e24491febea37f0f5c000fb03ced",
+                "url": "https://api.github.com/repos/mercadopago/dx-php/zipball/cb98165fdd4806d0b21a9ef1194b77f5abca31dc",
+                "reference": "cb98165fdd4806d0b21a9ef1194b77f5abca31dc",
                 "shasum": ""
             },
             "require": {
@@ -2256,7 +2256,7 @@
                 }
             ],
             "homepage": "https://github.com/mercadopago/dx-php",
-            "time": "2020-01-21T16:13:16+00:00"
+            "time": "2020-03-25T16:57:37+00:00"
         },
         {
             "name": "monolog/monolog",
