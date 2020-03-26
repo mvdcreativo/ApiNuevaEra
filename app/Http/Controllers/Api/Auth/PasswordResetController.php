@@ -91,7 +91,7 @@ class PasswordResetController extends Controller
                 'message' => 'Este token de restablecimiento de contraseña no es válido.'
             ], 404);
         }
-        return redirect()->away(env('FRONT_WEB')."acceder?email=".$passwordReset->email."&token=".$passwordReset->token);
+        return redirect()->away("https://nuevaerauruguay.com/acceder?email=".$passwordReset->email."&token=".$passwordReset->token);
         // return response()->json($passwordReset);
     }
 
