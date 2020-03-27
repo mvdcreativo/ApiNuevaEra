@@ -42,7 +42,7 @@ class NotificationMercadoPagoController extends Controller
         $notification->save();
 
 
-        if($notification->topic && $notification->topic === "merchant_orders"){
+        if($notification->topic && $notification->topic === "merchant_order"){
             
             $id = $notification->id_notificacion;
             $order_mp_client = new Client();
@@ -68,7 +68,7 @@ class NotificationMercadoPagoController extends Controller
                 $id_payment = $respuesta['payments'][0]['id'];
                 $response_payment = $paiment_mp_client->request('GET',$url_payment.$id_payment.'?access_token='.env('MP_TOKEN'));
                 $respuesta_payment = json_decode($response_payment->getBody(), true);
-                
+
                 $order_local->payment_metod_mp = $respuesta_payment['payment_method_id'];
             }
 
