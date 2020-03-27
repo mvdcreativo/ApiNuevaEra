@@ -31,8 +31,7 @@ class CreateOrdersTable extends Migration
             $table->string('url_pdf')->nullable();
             $table->bigInteger('payment_method_id')->nullable();
             $table->unsignedBigInteger('status_id');
-
-            
+           
 
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

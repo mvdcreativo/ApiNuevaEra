@@ -87,7 +87,8 @@ class MercadoPago
       ];
         
       $preference->auto_return = "all";
-      $preference->notification_url = "https://api.nuevaerauruguay.com/api/notification-cobro";
+      // $preference->notification_url = env('MP_URL_NOTIFICACION');
+      $preference->notification_url = 'http://mvdcreativo.servehttp.com/apiNuevaEra/public/api/notification-cobro';
       # Save and POST preference
       // dd($preference);
       $preference->save();

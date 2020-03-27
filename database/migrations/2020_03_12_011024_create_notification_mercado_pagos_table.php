@@ -15,7 +15,7 @@ class CreateNotificationMercadoPagosTable extends Migration
     {
         Schema::create('notification_mercado_pagos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('topic');
+            $table->string('topic')->nullable();
             $table->integer('id_notificacion');
             $table->integer('visto')->nullable();
 
