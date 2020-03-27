@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\NotificationMercadoPago;
 use GuzzleHttp\Client;
 use App\Order;
+use App\Status;
 
 class NotificationMercadoPagoController extends Controller
 {
@@ -61,6 +62,10 @@ class NotificationMercadoPagoController extends Controller
             $order_local->order_status_mp = $respuesta['order_status'];
             $order_local->cancelled_mp = $respuesta['cancelled'];
             $order_local->status_mp = $respuesta['status'];
+
+
+            $status = Status::where('code', "=", $respuesta['order_status'])->first();
+            $order_local->status_id = $status->id;
 
             if($respuesta['payments']){
                 $paiment_mp_client = new Client();
