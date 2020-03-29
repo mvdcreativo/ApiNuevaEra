@@ -21,7 +21,7 @@ class UserController extends Controller
         $pageSize = $request->pageSize;
         
         //
-        return User::orderBy('id', 'DESC')->paginate($pageSize);
+        return User::searcher($filter)->orderBy('id', 'DESC')->paginate($pageSize);
     }
 
     /**

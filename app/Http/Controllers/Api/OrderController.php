@@ -32,10 +32,10 @@ class OrderController extends Controller
 
         if($user->role === "ADM"){
 
-            return Order::with('status','productos')->orderBy('id', 'DESC')->paginate($pageSize);
+            return Order::with('status','productos')->searcher($filter)->orderBy('id', 'DESC')->paginate($pageSize);
         }else{
 
-            return Order::where('user_id', $user->id)->with('status','productos')->orderBy('id', 'DESC')->paginate($pageSize);
+            return Order::where('user_id', $user->id)->with('status','productos')->searcher($filter)->orderBy('id', 'DESC')->paginate($pageSize);
         }
         
         //

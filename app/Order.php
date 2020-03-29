@@ -25,4 +25,17 @@ class Order extends Model
     // {
     //     return $this->hasOne('App\NotificationCobros', 'nro_talon', 'talon_cobro');
     // }
+
+
+        ///SCOPES///
+
+        public function scopeSearcher($query, $searcher){
+            if($searcher)
+            
+                return $query->where('name', 'LIKE', "%$searcher%")
+                    ->orWhere('email', 'LIKE', "%$searcher%")
+                    ->orWhere('phone', 'LIKE', "%$searcher%")
+                    ->orWhere('id', 'LIKE', "%$searcher%");
+ 
+        }
 }
