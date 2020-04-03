@@ -41,6 +41,7 @@ Route::apiResource('order', 'Api\OrderController');
 Route::apiResource('send-message-contact', 'Api\MessageController');
 Route::apiResource('pay-methods', 'Api\PaymentMethodController');
 Route::apiResource('notification-cobro', 'Api\NotificationMercadoPagoController');
+Route::apiResource('status', 'Api\StatusController');
 
 
 Route::get('brand-by-slug/{slug}', 'Api\BrandController@brand_by_slug');

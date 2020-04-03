@@ -120,12 +120,15 @@ class OrderController extends Controller
         if($request->phone) $order->phone = $request->phone;
         if($request->rut) $order->rut = $request->rut;
         if($request->company) $order->company = $request->company;
+        if($request->status) $order->status_id = $request->status;
+
         // if($request->total) $order->total = $request->total;
         $order->save();
 
-
-        foreach ($request->get('products') as $value) {
-            $order->productos()->attach($value);
+        if($request->products){
+            foreach ($request->get('products') as $value) {
+                $order->productos()->attach($value);
+            }
         }
         return response()->json($order, 200);
     }
