@@ -94,7 +94,7 @@ class ProductController extends Controller
 
     public function bySlug($slug)
     {
-        $product = Product::where('slug', $slug)->first();
+        $product = Product::with('category','brand')->where('slug', $slug)->first();
         $product->visits = $product->visits + 1;
         $product->save();
 
