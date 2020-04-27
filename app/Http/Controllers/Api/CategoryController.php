@@ -68,6 +68,10 @@ class CategoryController extends Controller
 
 
 
+
+
+
+
      ////CATEGORY BY SLUG
 
      public function bySlug($slug){
@@ -76,6 +80,10 @@ class CategoryController extends Controller
          $category->save();
          return response()->json($category, 200);
      }
+
+
+
+
 
     /**
      * Update the specified resource in storage.

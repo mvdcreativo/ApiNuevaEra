@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Product;
+use App\Category;
+use App\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -92,14 +94,7 @@ class ProductController extends Controller
         return Product::find($id);
     }
 
-    public function bySlug($slug)
-    {
-        $product = Product::with('category','brand')->where('slug', $slug)->first();
-        $product->visits = $product->visits + 1;
-        $product->save();
 
-        return $product;
-    }
     /**
      * Update the specified resource in storage.
      *
@@ -175,4 +170,42 @@ class ProductController extends Controller
         return Excel::download(new ProductFacebookExport, 'da_catalog_commerce_commented_template.csv');
 
     }
+
+
+////////////////////////
+    public function bySlug($slug)
+    {
+        $product = Product::with('category','brand')->where('slug', $slug)->first();
+        $product->visits = $product->visits + 1;
+        $product->save();
+
+        return $product;
+    }
+////////////////////////////
+
+////////////////////////////
+    public function byCategoryID($category_id){
+        $product = Product::with('category','brand')->where('category_id', $category_id)->paginate();
+
+        $category = Category::find($category_id);
+        // return $category;  
+        $category->visits = $category->visits + 1;
+        $category->save();
+
+        return response()->json($product, 200);
+    }
+///////////////////////////
+
+////////////////////////////
+public function byBrandID($brand_id){
+    $product = Product::with('category','brand')->where('brand_id', $brand_id)->paginate();
+
+    $brand = Brand::find($brand_id);
+    // return $brand;  
+    $brand->visits = $brand->visits + 1;
+    $brand->save();
+
+    return response()->json($product, 200);
+}
+///////////////////////////
 }

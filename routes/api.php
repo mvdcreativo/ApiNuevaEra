@@ -47,6 +47,8 @@ Route::apiResource('status', 'Api\StatusController');
 Route::get('brand-by-slug/{slug}', 'Api\BrandController@brand_by_slug');
 Route::get('category-by-slug/{slug}', 'Api\CategoryController@bySlug');
 Route::get('product-by-slug/{slug}', 'Api\ProductController@bySlug');
+Route::get('product-by-cateory/{category_id}', 'Api\ProductController@byCategoryID');
+Route::get('product-by-brand/{brand_id}', 'Api\ProductController@byBrandID');
 Route::get('search', 'Api\SearchController@search');
 
 Route::get('products-faceboock', 'Api\ProductController@exportFaceboock');
