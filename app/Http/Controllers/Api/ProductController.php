@@ -89,9 +89,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        
-
-        return Product::find($id);
+        $product = Product::with('brand', 'category')->find($id);
+        return response()->json($product, 200);
     }
 
 
@@ -185,7 +184,7 @@ class ProductController extends Controller
 
 ////////////////////////////
     public function byCategoryID($category_id){
-        $product = Product::with('category','brand')->where('category_id', $category_id)->paginate();
+        $product = Product::with('category','brand')->where('category_id', $category_id)->paginate(6);
 
         $category = Category::find($category_id);
         // return $category;  
@@ -198,7 +197,7 @@ class ProductController extends Controller
 
 ////////////////////////////
 public function byBrandID($brand_id){
-    $product = Product::with('category','brand')->where('brand_id', $brand_id)->paginate();
+    $product = Product::with('category','brand')->where('brand_id', $brand_id)->paginate(6);
 
     $brand = Brand::find($brand_id);
     // return $brand;  
