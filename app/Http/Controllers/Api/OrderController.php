@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -51,14 +52,6 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
-//         $a=[16 =>['quantity' => 1, 'price'=> 2500]];
-
-//         $b = $request->products;
-
-//    return $b;
- 
-// return json_encode($request->products);
-
             $order = new Order;
             $order->user_id = $request->user_id;
             $order->name = $request->name;
@@ -74,6 +67,18 @@ class OrderController extends Controller
             $order->company = $request->company;
             $order->total = $request->total;
             $order->save();
+
+            ///actualiza User
+            $user = User::find($request->user_id);
+            $user->lastname = $request->lastname;
+            $user->address = $request->address;
+            $user->city = $request->city;
+            $user->state = $request->state;
+            $user->phone = $request->state;
+            $user->ci = $request->ci;
+            $user->rut = $request->rut;
+            $user->company = $request->company;
+            $user->save();
 
 
             foreach ($request->get('products') as $value) {

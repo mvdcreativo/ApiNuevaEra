@@ -18,15 +18,15 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->float('total');
             $table->string('name');
-            $table->string('lastname');
+            $table->string('lastname')->nullable();
             $table->string('company')->nullable();
             $table->string('ci')->nullable();
             $table->string('rut')->nullable();
             $table->string('address');
             $table->string('city');
             $table->string('state');
-            $table->string('email');
-            $table->string('phone');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->string('talon_cobro')->nullable();
             $table->string('url_pdf')->nullable();
             $table->bigInteger('payment_method_id')->nullable();
