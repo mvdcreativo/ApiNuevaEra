@@ -15,4 +15,12 @@ class SearchController extends Controller
         $result = Product::with('category')->searcher($searcher)->get();
         return response()->json($result, 200);
     }
+
+    public function search_paginate(Request $request){
+        $searcher = $request->buscando;
+
+        $result = Product::with('category','brand')->searcher($searcher)->paginate(14);
+
+        return response()->json($result, 200);
+    }
 }

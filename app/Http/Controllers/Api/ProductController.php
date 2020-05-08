@@ -184,7 +184,7 @@ class ProductController extends Controller
 
 ////////////////////////////
     public function byCategoryID($category_id){
-        $product = Product::with('category','brand')->where('category_id', $category_id)->paginate(6);
+        $product = Product::with('category','brand')->where('category_id', $category_id)->paginate(14);
 
         $category = Category::find($category_id);
         // return $category;  
@@ -197,7 +197,7 @@ class ProductController extends Controller
 
 ////////////////////////////
 public function byBrandID($brand_id){
-    $product = Product::with('category','brand')->where('brand_id', $brand_id)->paginate(6);
+    $product = Product::with('category','brand')->where('brand_id', $brand_id)->paginate(14);
 
     $brand = Brand::find($brand_id);
     // return $brand;  
