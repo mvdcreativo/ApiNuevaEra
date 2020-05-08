@@ -16,10 +16,10 @@ class SearchController extends Controller
         return response()->json($result, 200);
     }
 
-    public function search_paginate(Request $request){
-        $searcher = $request->buscando;
+    public function search_paginate($criterio){
+       
 
-        $result = Product::with('category','brand')->searcher($searcher)->paginate(14);
+        $result = Product::with('category','brand')->searcher($criterio)->paginate(14);
 
         return response()->json($result, 200);
     }
