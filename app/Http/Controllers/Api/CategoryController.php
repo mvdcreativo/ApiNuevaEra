@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -111,7 +112,7 @@ class CategoryController extends Controller
             if($request->name)$category->name = $name;
             if($request->slug)$category->slug = $slug;
             if($request->status){
-                $brand->status =  $status;
+                $category->status = $status;
                 /////AFECTAR ARTICULOS AL ACTIVAR O DESACTIVAR MARCA
                 $product= Product::where('category_id', $category->id)->get();
 
