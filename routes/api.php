@@ -54,6 +54,7 @@ Route::get('search-paginate/{criterio}', 'Api\SearchController@search_paginate')
 
 
 Route::get('products-faceboock', 'Api\ProductController@exportFaceboock');
+Route::post('social-auth', 'Api\Auth\SocialAuthController@loginSocial');
 
 
 Route::post('registro_cliente_cobrosya', 'Api\Cobrosya\EnvioPagosController@registrar_cliente');
