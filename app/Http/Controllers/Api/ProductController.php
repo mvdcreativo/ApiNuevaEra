@@ -104,12 +104,7 @@ class ProductController extends Controller
     public function update($id, Request $request)
     {
        // return $request->file('picture');
-       $this->validate($request, [
-        'name' => ['required'],
-        'price' => ['required'],
-        'name_concat' => ['required'],
-        'stock' => ['required'],
-    ]);
+
 
     $name = $request->name;
     $slug = str_slug($name);
@@ -122,16 +117,17 @@ class ProductController extends Controller
             }else{
                 
         $product = Product::find($id);
-        $product->name = $name;
-        $product->slug = $slug;
-        $product->name_concat = $request->name_concat;
-        $product->price = $request->price;
+        if($request->name) $product->name = $name;
+        if($request->slug) $product->slug = $slug;
+        if($request->name_concat) $product->name_concat = $request->name_concat;
+        if($request->price) $product->price = $request->price;
        if($request->price_mayorista or $request->price_mayorista==0 ) $product->price_mayorista = $request->price_mayorista;
        if($request->discount or $request->discount==0 ) $product->discount = $request->discount;
-        $product->stock = $request->stock;
-        $product->brand_id = $request->brand_id;
-        $product->category_id = $request->category_id;
-        $product->description = $request->description;
+       if($request->stock) $product->stock = $request->stock;
+       if($request->brand_id) $product->brand_id = $request->brand_id;
+       if($request->category_id) $product->category_id = $request->category_id;
+       if($request->status) $product->status = $request->status;
+       if($request->description) $product->description = $request->description;
         $product->save();
 
         if($request->file('picture')){
