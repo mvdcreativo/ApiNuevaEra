@@ -8,7 +8,7 @@ class Carousel extends Model
 {
     //
     protected $fillable = [
-        'name', 'platform'
+        'name', 'platform','status'
     ];
 
     public function images()
