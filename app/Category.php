@@ -25,6 +25,6 @@ class Category extends Model
 
     public function brands()
     {
-        return $this->belongsToMany('App\Brands');
+        return $this->belongsToMany('App\Brand');
     }
 }

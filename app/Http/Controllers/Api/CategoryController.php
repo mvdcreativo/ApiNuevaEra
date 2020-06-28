@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Category;
 use App\Product;
+use App\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -64,7 +65,7 @@ class CategoryController extends Controller
     {
         
 
-        return Category::with('products')->find($id);   
+        return Category::with('brands')->find($id);   
      }
 
 
@@ -76,7 +77,7 @@ class CategoryController extends Controller
      ////CATEGORY BY SLUG
 
      public function bySlug($slug){
-         $category = Category::with('products')->where('slug', $slug)->first();
+         $category = Category::with('products','brands')->where('slug', $slug)->first();
          $category->visits = $category->visits + 1;
          $category->save();
          return response()->json($category, 200);
