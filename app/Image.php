@@ -8,7 +8,7 @@ class Image extends Model
 {
     //
     protected $fillable = [
-        'title', 'subtitle', 'status', 'url'
+        'title', 'subtitle', 'status', 'url', 'position'
     ];
 
     public function carousels()

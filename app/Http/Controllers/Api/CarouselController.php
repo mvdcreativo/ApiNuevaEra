@@ -37,6 +37,7 @@ class CarouselController extends Controller
         $carousel = new Carousel;
         $carousel->name = $request->name;
         $carousel->platform = $request->platform;
+        $carousel->status = $request->status;
         $carousel->save();
 
 
@@ -87,6 +88,16 @@ class CarouselController extends Controller
         $carousel = Carousel::with('images')->findOrFail($id);
         if($request->name)$carousel->name = $request->name;
         if($request->platform)$carousel->platform = $request->platform;
+        if($request->status){
+            Carousel::where('status','!=',null)
+                ->where('id','!=',$id)
+                ->where('platform', $carousel->platform)
+                ->update(['status'=>null]);
+
+            $carousel->status = $request->status;
+        }
+
+        $carousel->save();
 
 
         // Images
@@ -112,7 +123,8 @@ class CarouselController extends Controller
             }
             $carousel = Carousel::with('images')->find($id);
             return response()->json($carousel, 200);
-         }    
+         }
+         return response()->json($carousel, 200);
     }
 
     /**
@@ -121,19 +133,46 @@ class CarouselController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy(Request $request, $id)
+    {   
         $carousel = Carousel::with('images')->findOrFail($id);
-        foreach ($carousel->images as $image) {
-            $img = Image::find($image->id);
-            $imgName = explode("/", $image->url);
-            Storage::disk('public')->delete('images/carousel/'.$imgName[6]);
-            $img->delete();
-            
-        }
-        $carousel->delete();
 
-        return response()->json($carousel, 200);
+        if($request->image_id){
+            foreach ($carousel->images as $image) {
+                if($image->id == $request->image_id){
+                    $img = Image::find($image->id);
+                    $imgName = explode("/", $image->url);
+                    Storage::disk('public')->delete('images/carousel/'.$imgName[6]);
+                    $img->delete();
+                    $carousel = Carousel::with('images')->findOrFail($id);
+                    return response()->json($carousel, 200);
+                }
+            }
+        }else{
+            
+            foreach ($carousel->images as $image) {
+                $img = Image::find($image->id);
+                $imgName = explode("/", $image->url);
+                Storage::disk('public')->delete('images/carousel/'.$imgName[6]);
+                $img->delete();
+                
+            }
+            $carousel->delete();
+            return response()->json($carousel, 200);
+        }
+
+    }
+
+  
+    public function active(Request $request)
+    {
+        $platform = $request->platform;
+        $active_carousel = Carousel::with('images')
+                                ->where('platform',$platform)
+                                ->where('status','!=', null)
+                                ->first();
+
+        return response()->json($active_carousel, 200);
     }
 }
 

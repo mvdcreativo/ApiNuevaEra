@@ -43,6 +43,8 @@ Route::apiResource('pay-methods', 'Api\PaymentMethodController');
 Route::apiResource('notification-cobro', 'Api\NotificationMercadoPagoController');
 Route::apiResource('status', 'Api\StatusController');
 Route::apiResource('carousel', 'Api\CarouselController');
+Route::apiResource('image', 'Api\ImageController');
+
 
 
 Route::get('brand-by-slug/{slug}', 'Api\BrandController@brand_by_slug');
@@ -52,17 +54,19 @@ Route::get('product-by-category/{category_id}', 'Api\ProductController@byCategor
 Route::get('product-by-brand/{brand_id}', 'Api\ProductController@byBrandID');
 Route::get('search', 'Api\SearchController@search');
 Route::get('search-paginate/{criterio}', 'Api\SearchController@search_paginate');
+Route::get('active-carousel', 'Api\CarouselController@active');
+
 
 
 Route::get('products-faceboock', 'Api\ProductController@exportFaceboock');
 Route::post('social-auth', 'Api\Auth\SocialAuthController@loginSocial');
 
 
-Route::post('registro_cliente_cobrosya', 'Api\Cobrosya\EnvioPagosController@registrar_cliente');
-Route::post('crear_talon_cobrosya', 'Api\Cobrosya\EnvioPagosController@crear_talon');
-Route::post('user_tarjetas', 'Api\Cobrosya\EnvioPagosController@user_tarjetas');
-Route::post('navega-a-cobro', 'Api\Cobrosya\EnvioPagosController@navega_a_cobro');
-Route::post('firma-cobrosya', 'Api\Cobrosya\EnvioPagosController@firma');
+// Route::post('registro_cliente_cobrosya', 'Api\Cobrosya\EnvioPagosController@registrar_cliente');
+// Route::post('crear_talon_cobrosya', 'Api\Cobrosya\EnvioPagosController@crear_talon');
+// Route::post('user_tarjetas', 'Api\Cobrosya\EnvioPagosController@user_tarjetas');
+// Route::post('navega-a-cobro', 'Api\Cobrosya\EnvioPagosController@navega_a_cobro');
+// Route::post('firma-cobrosya', 'Api\Cobrosya\EnvioPagosController@firma');
 
 
 Route::group([    
