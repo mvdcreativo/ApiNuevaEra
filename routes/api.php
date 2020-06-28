@@ -55,6 +55,7 @@ Route::get('product-by-brand/{brand_id}', 'Api\ProductController@byBrandID');
 Route::get('search', 'Api\SearchController@search');
 Route::get('search-paginate/{criterio}', 'Api\SearchController@search_paginate');
 Route::get('active-carousel', 'Api\CarouselController@active');
+Route::get('relacionar', 'Api\CategoryController@relacionar');
 
 
 

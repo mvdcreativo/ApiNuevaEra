@@ -143,4 +143,15 @@ class CategoryController extends Controller
 
         return response()->json($category, 200);    
     }
+
+
+    public function relacionar()
+    {
+        $products = Product::all();
+        foreach ($products as $product) {
+            ///relacionamos la marca con categoria
+            $brand = Brand::find($product->brand_id);
+            $brand->categories()->sync($product->category_id , false);
+        }
+    }
 }

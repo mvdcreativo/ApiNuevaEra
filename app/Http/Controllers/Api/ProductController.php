@@ -67,9 +67,9 @@ class ProductController extends Controller
             $product->save();
 
             ///relacionamos la marca con categoria
-            $category = Category::find($request->category_id);
-            $category->brands()->sync($request->brand_id);
-            $category->save();
+            $brand = Brand::find($product->brand_id);
+            $brand->categories()->sync($product->category_id);
+            
 
             
             if($request->file('picture')){
@@ -139,9 +139,9 @@ class ProductController extends Controller
 
         ///relacionamos la marca con categoria
 
-        $category = Category::find($product->category_id);
-        $category->brands()->sync($product->brand_id);
-        $category->save();
+        $brand = Brand::find($product->brand_id);
+        $brand->categories()->sync($product->category_id);
+        
 
         if($request->file('picture')){
             $img = $request->file('picture');
