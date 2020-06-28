@@ -66,6 +66,12 @@ class ProductController extends Controller
             $product->description = $request->description;
             $product->save();
 
+            ///relacionamos la marca con categoria
+            $category = Category::find($request->category_id);
+            $category->brands()->sync($request->brand_id);
+            $category->save();
+
+            $image->carousels()->sync($id);
             if($request->file('picture')){
                 $img = $request->file('picture');
 
@@ -129,6 +135,13 @@ class ProductController extends Controller
        if($request->status) $product->status = $request->status;
        if($request->description) $product->description = $request->description;
         $product->save();
+
+
+        ///relacionamos la marca con categoria
+
+        $category = Category::find($product->category_id);
+        $category->brands()->sync($product->brand_id);
+        $category->save();
 
         if($request->file('picture')){
             $img = $request->file('picture');
