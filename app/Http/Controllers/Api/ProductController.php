@@ -71,7 +71,7 @@ class ProductController extends Controller
             $category->brands()->sync($request->brand_id);
             $category->save();
 
-            $image->carousels()->sync($id);
+            
             if($request->file('picture')){
                 $img = $request->file('picture');
 
