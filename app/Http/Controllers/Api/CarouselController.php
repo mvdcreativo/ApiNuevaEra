@@ -103,7 +103,7 @@ class CarouselController extends Controller
         // Images
         $this->validate($request, [
 
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048000'
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048000'
 
         ]);
         if($request->hasFile('images')){
