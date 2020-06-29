@@ -113,9 +113,9 @@ class CarouselController extends Controller
                 // echo $image->path();
 
                 $path = Storage::disk('public')->put('images/carousel',  $image);
-                // $product->fill(['file' => asset($path)])->save();ApiNuevaEra/storage/app/public/images/carousel
+                // $product->fill(['file' => asset($path)])->save();
                 $image = new Image;
-                $image->fill(['url' => "ApiNuevaEra/storage/app/public/".$path])->save();
+                $image->fill(['url' => asset('storage/'.$path)])->save();
                 $image->carousels()->sync($id);
                 $image->save();
  
