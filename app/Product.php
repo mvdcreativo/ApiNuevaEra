@@ -50,8 +50,8 @@ class Product extends Model
     public function scopeSearcher($query, $searcher){
         if($searcher)
         
-            return $query->where('name', 'LIKE', "%$searcher%")
-                ->orWhere('description', 'LIKE', "%$searcher%");
+            return $query->where('name', 'LIKE', "%$searcher%");
+                // ->orWhere('description', 'LIKE', "%$searcher%");
 
     }
 

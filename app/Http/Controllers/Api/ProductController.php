@@ -8,6 +8,8 @@ use App\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductFacebookExport;
@@ -44,7 +46,7 @@ class ProductController extends Controller
         ]);
 
         $name = $request->name;
-        $slug = str_slug($name);
+        $slug = Str::slug($name);
 
 
         $validateProduct = Product::where('slug', $slug)->get();
@@ -113,7 +115,7 @@ class ProductController extends Controller
 
 
     $name = $request->name;
-    $slug = str_slug($name);
+    $slug = Str::slug($name);
 
 
     $validateProduct = Product::where('slug', $slug)->where('id', '!=', $id)->get();
