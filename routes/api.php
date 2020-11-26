@@ -58,7 +58,7 @@ Route::get('active-carousel', 'Api\CarouselController@active');
 Route::get('relacionar', 'Api\CategoryController@relacionar');
 
 
-
+Route::get('export_user', 'Api\UserController@export_user_excel');
 Route::get('products-faceboock', 'Api\ProductController@exportFaceboock');
 Route::post('social-auth', 'Api\Auth\SocialAuthController@loginSocial');
 

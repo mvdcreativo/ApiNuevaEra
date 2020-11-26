@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exports\UserExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -142,6 +144,12 @@ class UserController extends Controller
     public function search(Request $request){
 
         // $user = User::where('name')
+
+    }
+
+    public function export_user_excel(){
+        // Storage::disk('public')->put('images/productos',  $img);
+        return Excel::download(new UserExport, 'usuarios_nueva_era_web.xlsx');
 
     }
 }
