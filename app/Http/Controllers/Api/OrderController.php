@@ -74,7 +74,7 @@ class OrderController extends Controller
             $user->address = $request->address;
             $user->city = $request->city;
             $user->state = $request->state;
-            $user->phone = $request->state;
+            $user->phone = $request->phone;
             $user->ci = $request->ci;
             $user->rut = $request->rut;
             $user->company = $request->company;
