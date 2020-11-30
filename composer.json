@@ -19,7 +19,7 @@
         "mercadopago/dx-php": "^2.2.1",
         "nesbot/carbon": "^2.31",
         "s-ichikawa/laravel-sendgrid-driver": "^2.1",
-        "lcobucci/jwt":"^3.3"
+        "lcobucci/jwt": "3.3.3"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
