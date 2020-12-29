@@ -54,7 +54,7 @@ class NotificationMercadoPagoController extends Controller
 
             $respuesta = json_decode($response->getBody(), true);
 
-
+            return [$respuesta['external_reference'], $notification];
             //actualiza orden
             $order_local = Order::find($respuesta['external_reference']);
             // $order_local->payment_metod_mp = $respuesta['payment_metod'];
