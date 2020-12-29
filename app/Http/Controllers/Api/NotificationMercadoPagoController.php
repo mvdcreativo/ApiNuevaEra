@@ -43,18 +43,22 @@ class NotificationMercadoPagoController extends Controller
         $notification->save();
 
         // return $request;
-        if($notification->topic && $notification->topic === "merchant_order" || $notification->topic === "merchant_orders" ){
+        if($notification->topic && $notification->topic === "merchant_order"){
             
             $id = $notification->id_notificacion;
             $order_mp_client = new Client();
             $url_merchant_orders = 'https://api.mercadopago.com//merchant_orders/';
 
-            $response = $order_mp_client->request('GET',$url_merchant_orders.$id.'?access_token='.env('MP_TOKEN'));
-
-
+            try {
+                $response = $order_mp_client->request('GET',$url_merchant_orders.$id.'?access_token='.env('MP_TOKEN'));
+            }
+            catch (ClientException $e) {
+                $response = $e->getResponse();
+                $responseBodyAsString = $response->getBody()->getContents();
+                return $responseBodyAsString;
+            }
             $respuesta = json_decode($response->getBody(), true);
-
-            return [$respuesta['external_reference'], $notification];
+     
             //actualiza orden
             $order_local = Order::find($respuesta['external_reference']);
             // $order_local->payment_metod_mp = $respuesta['payment_metod'];
