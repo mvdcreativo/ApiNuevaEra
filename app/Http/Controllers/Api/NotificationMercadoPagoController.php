@@ -43,7 +43,7 @@ class NotificationMercadoPagoController extends Controller
         $notification->save();
 
         return $request;
-        if($notification->topic && $notification->topic === "merchant_order"){
+        if($notification->topic && $notification->topic === "merchant_order" || $notification->topic === "merchant_orders" ){
             
             $id = $notification->id_notificacion;
             $order_mp_client = new Client();
