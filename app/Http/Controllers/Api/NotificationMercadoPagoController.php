@@ -42,7 +42,7 @@ class NotificationMercadoPagoController extends Controller
         $notification->id_notificacion = $request->id;
         $notification->save();
 
-        return $request;
+        // return $request;
         if($notification->topic && $notification->topic === "merchant_order" || $notification->topic === "merchant_orders" ){
             
             $id = $notification->id_notificacion;
