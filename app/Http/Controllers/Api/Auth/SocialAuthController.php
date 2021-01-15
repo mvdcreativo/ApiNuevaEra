@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 use App\User;
 
@@ -55,7 +57,7 @@ class SocialAuthController extends Controller
                     'name'     => $response['given_name'],
                     'lastname' => $response['family_name'],
                     'email'    => $response['email'],
-                    'password' => bcrypt($response['at_hash']),
+                    'password' => bcrypt(Str::random(8)),
                     'social_id' => $response['sub'],
                 ]);
                 $user->save();
@@ -93,7 +95,7 @@ class SocialAuthController extends Controller
                     'name'     => $response['first_name'],
                     'lastname' => $response['last_name'],
                     'email'    => $response['email'],
-                    'password' => bcrypt("pass!!x900".$response['id']),
+                    'password' => bcrypt(Str::random(8)),
                     'social_id' => $response['id'],
                 ]);
                 $user->save();
