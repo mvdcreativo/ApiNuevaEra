@@ -7,6 +7,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class BrandController extends Controller
 {
@@ -46,7 +47,7 @@ class BrandController extends Controller
             'name' => ['required']
         ]);
         $name = $request->name;
-        $slug = str_slug($name);
+        $slug = Str::slug($name);
         if($request->destaca){
             $destaca = $request->destaca;
         }else{
@@ -109,7 +110,7 @@ class BrandController extends Controller
 
 
         $name = $request->name;
-        $slug = str_slug($name);
+        $slug = Str::slug($name);
         $destaca = $request->destaca;
         $description= $request->description;
         $status = $request->status;

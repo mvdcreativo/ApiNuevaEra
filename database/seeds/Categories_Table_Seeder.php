@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -25,7 +26,7 @@ class CategoriesTableSeeder extends Seeder
                 $category = new App\Category([
                     'id' => $campo->id,
                     'name'=> $name,
-                    'slug'=> str_slug($name),
+                    'slug'=> Str::slug($name),
                     'status' => $status
                 ]);
                 $category->save();

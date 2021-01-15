@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class Products_Table_Seeder extends Seeder
 {
@@ -29,7 +30,7 @@ class Products_Table_Seeder extends Seeder
             }else{
                 foreach ($dataBrands as $item_brand) {
                     if($item_brand->id == $campo->marca){
-                        $slugBrand = str_slug($item_brand->name);
+                        $slugBrand = Str::slug($item_brand->name);
 
                         $brandBySlug = App\Brand::where('slug', $slugBrand)->first();
                         $marca = $brandBySlug->id;
@@ -54,7 +55,7 @@ class Products_Table_Seeder extends Seeder
             
                 'id' => $campo->id,
                 'name'=> $name,
-                'slug'=> str_slug($name),
+                'slug'=> Str::slug($name),
                 'name_concat'=> $name,
                 'brand_id'=> $marca,
                 'category_id' => $campo->category,

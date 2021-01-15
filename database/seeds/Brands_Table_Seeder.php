@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
 
 class Brands_Table_Seeder extends Seeder
 {
@@ -15,7 +17,7 @@ class Brands_Table_Seeder extends Seeder
         $data= json_decode($json);
 
         foreach ($data as $campo) {
-            $brandSlug = str_slug($campo->name);
+            $brandSlug = Str::slug($campo->name);
             $brand = App\Brand::where('slug', $brandSlug)->first();
             if($brand){
                 $brand->categories()->sync($campo->idCategory);
@@ -32,7 +34,7 @@ class Brands_Table_Seeder extends Seeder
                 $brandNew = new App\Brand([
                     'id' => $campo->id,
                     'name'=> $name,
-                    'slug'=> str_slug($name),
+                    'slug'=> Str::slug($name),
                     'destaca'=> rand(0,1),
                     "status" => $status,
                 ]);

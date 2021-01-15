@@ -7,6 +7,8 @@ use App\Product;
 use App\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+
 
 
 class CategoryController extends Controller
@@ -36,7 +38,7 @@ class CategoryController extends Controller
         ]);
 
         $name = $request->name;
-        $slug = str_slug($name);
+        $slug = Str::slug($name);
         $validateCategory = Category::where('slug', $slug)->get();
 
 
@@ -99,7 +101,7 @@ class CategoryController extends Controller
      
         // return $request->all();
         $name = $request->name;
-        $slug = str_slug($name);
+        $slug = Str::slug($name);
         $status = $request->status;
 
         $validateCategory = Category::where('slug', $slug)->where('id', '!=', $id)->get();
