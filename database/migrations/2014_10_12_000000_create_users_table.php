@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('ci')->nullable();
             $table->string('rut')->nullable();
             $table->string('company')->nullable();
+            $table->string('user_apple')->nullable();
             $table->string('status')->default('ACT')->nullable();
             $table->string('id_cliente_cobrosya')->nullable();
             $table->float('discount')->nullable();

@@ -36,6 +36,39 @@ class SocialAuthController extends Controller
     {
         $provider = $request->provider;
         
+        if($provider == "APPLE"){
+
+            if (isset($request->response->email)){
+                $user_excist = User::where('email', $request->response->email)->first();
+                ///si existe logeamos y devolvemos token
+                if($user_excist){
+                    $user_excist->user_apple = $request->response->user;
+                    $user_excist->save();
+    
+                    return $this->login($user_excist);
+                }else{
+                /// si no existe creamos usuario
+                    $user = new User([
+                        'name'     => $request->response->givenName,
+                        'lastname' => $request->response->familyName,
+                        'email'    => $request->response->email,
+                        'password' => bcrypt(Str::random(8)),
+                        'social_id' => $request->response->user,
+                    ]);
+                    $user->save();
+    
+                    if($user){
+                        return $this->login($user);
+                    };
+                    
+                }
+
+            }
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        ////////////
+
         if($provider == "GOOGLE"){
             $social_token = $request->idToken;
             $social_client = new Client();
