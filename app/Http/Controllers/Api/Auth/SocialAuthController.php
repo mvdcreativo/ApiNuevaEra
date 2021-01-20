@@ -35,9 +35,9 @@ class SocialAuthController extends Controller
     function loginSocial(Request $request)
     {
         $provider = $request->provider;
-        
         if($provider == "APPLE"){
-
+            return $request->all();
+            
             if (isset($request->response->email)){
                 $user_excist = User::where('email', $request->response->email)->first();
                 ///si existe logeamos y devolvemos token
