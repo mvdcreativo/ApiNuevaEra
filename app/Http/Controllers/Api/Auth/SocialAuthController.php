@@ -38,12 +38,16 @@ class SocialAuthController extends Controller
         if($provider == "APPLE"){
             
             $email = $request->response['email'];
+            $dominio_mail = explode('@', $email);
+            if($request->response['user']){
+                $user = User::where('user_apple', $request->response['user'])->first();
+                    
+                if($user){
+                    return $this->login($user);
+                }            
+            }
             if ($email){
                 ///retorna a pedir email si email es de apple
-                $dominio_mail = explode('@', $email);
-                if($dominio_mail[1] == "privaterelay.appleid.com"){
-                    return response()->json(['dataReturn' => $request->all()], 200);
-                }
                 ////
                 $user_excist = User::where('email', $request->response['email'])->first();
                 ///si existe logeamos y devolvemos token
@@ -59,7 +63,7 @@ class SocialAuthController extends Controller
                         'lastname' => $request->response['familyName'],
                         'email'    => $request->response['email'],
                         'password' => bcrypt(Str::random(8)),
-                        'social_id' => $request->response['user'],
+                        'user_apple' => $request->response['user']
                     ]);
                     $user->save();
     
