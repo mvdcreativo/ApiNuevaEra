@@ -196,7 +196,10 @@ class ProductController extends Controller
 
 ////////////////////////////
     public function byCategoryID($category_id){
-        $product = Product::with('category','brand')->where('category_id', $category_id)->paginate(14);
+        $product = Product::with('category','brand')
+        ->where('category_id', $category_id)
+        ->where('status','!=','DIS')
+        ->paginate(14);
 
         $category = Category::find($category_id);
         // return $category;  
