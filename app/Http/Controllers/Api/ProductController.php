@@ -25,8 +25,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::with('category','brand')->get();
+        return Product::with('category','brand')->where('status','!=','DIS')->get();
 
+    }
+
+    public function all()
+    {
+        return Product::with('category','brand')->get();
     }
 
     /**

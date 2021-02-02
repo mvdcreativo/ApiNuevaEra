@@ -37,6 +37,9 @@ Route::group(['prefix' => 'auth'], function () {
 Route::apiResource('brand', 'Api\BrandController');
 Route::apiResource('category', 'Api\CategoryController');
 Route::apiResource('product', 'Api\ProductController');
+Route::get('products', 'Api\ProductController@all');
+
+
 Route::apiResource('order', 'Api\OrderController');
 Route::apiResource('send-message-contact', 'Api\MessageController');
 Route::apiResource('pay-methods', 'Api\PaymentMethodController');
