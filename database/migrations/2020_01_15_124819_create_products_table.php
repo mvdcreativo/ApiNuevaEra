@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('slug', 128)->unique();
             $table->float('price');
             $table->string('status')->default('ACT');
-            $table->float('price_mayorista')->nullable();
+            $table->float('price_mayorista')->nullable();//discount mayorista
             $table->float('discount')->nullable();
             $table->string('picture')->nullable();
             $table->longText('description')->nullable();
