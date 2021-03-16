@@ -80,6 +80,8 @@ class OrderController extends Controller
             $user->company = $request->company;
             $user->save();
 
+            $products = $request->get('products');
+
 
             foreach ($request->get('products') as $value) {
                 $order->productos()->attach($value);

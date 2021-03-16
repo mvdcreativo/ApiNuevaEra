@@ -42,7 +42,7 @@ class MercadoPago
         $item->title = $value->name;
         $item->quantity = $value->pivot->quantity;
         $item->currency_id = 'UYU';
-        $item->unit_price = $value->pivot->price;
+        $item->unit_price = $this->calculoDesc($value->pivot->price, $value->discount_product, $value->discount_user );
         $item->picture_url = asset("storage/".$value->picture);
 
         $items[] = $item;
@@ -100,4 +100,16 @@ class MercadoPago
       return $preference->init_point;
   }
 
+
+  private function calculoDesc($price , $descuentoProduct, $dMayorista = 0){
+    $descuentoP = (price * descuentoProduct) / 100;
+    $pricePublico = price - descuentoP;
+  
+    if($dMayorista){
+      $descuentMayorista = ($pricePublico * $dMayorista) / 100;
+      return $pricePublico - $descuentMayorista;
+    }
+  
+    return $pricePublico;
+  }
 }
