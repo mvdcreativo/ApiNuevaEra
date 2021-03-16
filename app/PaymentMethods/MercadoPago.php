@@ -42,11 +42,12 @@ class MercadoPago
         $item->title = $value->name;
         $item->quantity = $value->pivot->quantity;
         $item->currency_id = 'UYU';
-        $item->unit_price = $this->calculoDesc($value->pivot->price, $value->discount_product, $value->discount_user );
+        $item->unit_price = $this->calculoDesc($value->pivot->price, $value->pivot->discount_product, $value->pivot->discount_user );
         $item->picture_url = asset("storage/".$value->picture);
 
         $items[] = $item;
       }
+      
         // $item = new Item();
         // $item->id = 12456;
         // $item->title = "NOMBRE";
