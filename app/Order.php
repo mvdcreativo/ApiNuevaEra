@@ -13,7 +13,7 @@ class Order extends Model
 
     public function productos()
     {
-        return $this->belongsToMany('App\Product')->withPivot('quantity','price');
+        return $this->belongsToMany('App\Product')->withPivot('quantity','price','discount_user','discount_product');
     }
 
     public function status()
