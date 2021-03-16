@@ -102,8 +102,8 @@ class MercadoPago
 
 
   private function calculoDesc($price , $descuentoProduct, $dMayorista = 0){
-    $descuentoP = (price * descuentoProduct) / 100;
-    $pricePublico = price - descuentoP;
+    $descuentoP = ($price * $descuentoProduct) / 100;
+    $pricePublico = $price - $descuentoP;
   
     if($dMayorista){
       $descuentMayorista = ($pricePublico * $dMayorista) / 100;
