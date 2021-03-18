@@ -25,13 +25,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::with('category','brand')->where('status','!=','DIS')->get();
+        return Product::with('category','brand')->where('status','!=','DIS')->orderBy('id', 'desc')->get();
 
     }
 
     public function all()
     {
-        return Product::with('category','brand')->get();
+        return Product::with('category','brand')->orderBy('id', 'desc')->get();
     }
 
     /**
@@ -204,6 +204,7 @@ class ProductController extends Controller
         $product = Product::with('category','brand')
         ->where('category_id', $category_id)
         ->where('status','!=','DIS')
+        ->orderBy('id', 'desc')
         ->paginate(14);
 
         $category = Category::find($category_id);
@@ -217,7 +218,7 @@ class ProductController extends Controller
 
 ////////////////////////////
 public function byBrandID($brand_id){
-    $product = Product::with('category','brand')->where('brand_id', $brand_id)->paginate(14);
+    $product = Product::with('category','brand')->where('brand_id', $brand_id)->orderBy('id', 'desc')->paginate(14);
 
     $brand = Brand::find($brand_id);
     // return $brand;  

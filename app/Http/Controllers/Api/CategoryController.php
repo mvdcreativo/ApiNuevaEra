@@ -79,7 +79,7 @@ class CategoryController extends Controller
      ////CATEGORY BY SLUG
 
      public function bySlug($slug){
-         $category = Category::with('products','brands')->where('slug', $slug)->first();
+         $category = Category::with('products','brands')->where('slug', $slug)->orderBy('id', 'desc')->first();
          $category->visits = $category->visits + 1;
          $category->save();
          return response()->json($category, 200);
