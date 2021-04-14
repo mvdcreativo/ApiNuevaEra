@@ -231,7 +231,8 @@ class ProductController extends Controller
     public function findByIds(Request $request)
     {
         $ids = $request->get('ids');
-        $products= Product::with('brand', 'category')->whereIn('id',$ids)->get();
+
+        $products= Product::with('brand', 'category')->whereIn('id',json_decode($ids))->get();
         return response()->json($products, 200);
     }
 }
