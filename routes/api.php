@@ -55,6 +55,7 @@ Route::get('category-by-slug/{slug}', 'Api\CategoryController@bySlug');
 Route::get('product-by-slug/{slug}', 'Api\ProductController@bySlug');
 Route::get('product-by-category/{category_id}', 'Api\ProductController@byCategoryID');
 Route::get('product-by-brand/{brand_id}', 'Api\ProductController@byBrandID');
+Route::get('products-by-ids', 'Api\ProductController@findByIds');
 Route::get('search', 'Api\SearchController@search');
 Route::get('search-paginate/{criterio}', 'Api\SearchController@search_paginate');
 Route::get('active-carousel', 'Api\CarouselController@active');

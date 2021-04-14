@@ -214,18 +214,24 @@ class ProductController extends Controller
 
         return response()->json($product, 200);
     }
-///////////////////////////
+    ///////////////////////////
 
-////////////////////////////
-public function byBrandID($brand_id){
-    $product = Product::with('category','brand')->where('brand_id', $brand_id)->orderBy('id', 'desc')->paginate(14);
+    ////////////////////////////
+    public function byBrandID($brand_id){
+        $product = Product::with('category','brand')->where('brand_id', $brand_id)->orderBy('id', 'desc')->paginate(14);
 
-    $brand = Brand::find($brand_id);
-    // return $brand;  
-    $brand->visits = $brand->visits + 1;
-    $brand->save();
+        $brand = Brand::find($brand_id);
+        // return $brand;  
+        $brand->visits = $brand->visits + 1;
+        $brand->save();
 
-    return response()->json($product, 200);
-}
-///////////////////////////
+        return response()->json($product, 200);
+    }
+    ///////////////////////////
+    public function findByIds(Request $request)
+    {
+        $ids = $request->get('ids');
+        $products= Product::with('brand', 'category')->whereIn($ids)->get();
+        return response()->json($products, 200);
+    }
 }
