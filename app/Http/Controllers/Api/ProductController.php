@@ -230,7 +230,6 @@ class ProductController extends Controller
     ///////////////////////////
     public function findByIds(Request $request)
     {
-        return $request->get('ids');
         $ids_sep_coma = $request->get('ids');
         $ids = explode(",", $ids_sep_coma);
         $products= Product::with('brand', 'category')->whereIn('id',$ids)->get();
